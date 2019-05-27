@@ -1,0 +1,2 @@
+-- shows you all the tables you have
+SELECT table_name FROM user_tables;
