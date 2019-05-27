@@ -1,12 +1,12 @@
 CREATE TABLE Users(
    user_id CHAR(32) PRIMARY KEY,
-   username VARCHAR(16) UNIQUE,
+   username VARCHAR(32) UNIQUE,
    full_name VARCHAR(32),
-   password VARCHAR(32) NOT NULL,
+   password CHAR(64) NOT NULL,
    age INTEGER NOT NULL,
-   sex VARCHAR(8) NOT NULL,
-   city VARCHAR(16) NOT NULL,
-   province VARCHAR(16) NOT NULL
+   sex CHAR(1) NOT NULL,
+   city VARCHAR(32) NOT NULL,
+   province CHAR(2) NOT NULL
 );
 
 CREATE TABLE PostalCode(
