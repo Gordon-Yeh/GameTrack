@@ -43,3 +43,59 @@ INSERT INTO Messages VALUES ('4dab15eae4fd4f229b84ba99d4dc33b7', '41195d1680b611
 INSERT INTO Messages VALUES ('6fc4ea67a2cd41ca8ba7d169a2462a4d', '51195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'nice meeting you', '1558992568');
 
 INSERT INTO Messages VALUES ('67a89af1a3d14279805c17b24edefafe', '31195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'we should play again sometimes', '1558992568');
+
+-- SportInfo 
+
+INSERT INTO SportInfo VALUES (
+    'The game of tennis.',
+    'number_of_rounds: 3, expected_game_duration: 180');
+
+INSERT INTO SportInfo VALUES (
+    'The game of soccer.',
+    'expected_game_duration: 150'
+);
+
+INSERT INTO SportInfo VALUES (
+    'The game of basketball.', 'number_of_rounds: 2, expected_game_duration: 150'
+);
+
+INSERT INTO SportInfo VALUES (
+    'The game of hockey.',
+    'number_of_rounds: 3, expected_game_duration: 150'
+);
+
+INSERT INTO SportInfo VALUES (
+    'The game of baseball.',
+    'number_of_rounds: 9, expected_game_duration: 210'
+);
+
+-- SportDescription
+
+INSERT INTO SportDescription(name, suggested_number_of_player, description) VALUES (
+    'Tennis',
+    2,
+    'The game of tennis.');
+
+INSERT INTO SportDescription(name, suggested_number_of_player, description) VALUES (
+    'Soccer',
+    11,
+    'The game of soccer.'
+);
+
+INSERT INTO SportDescription(name, suggested_number_of_player, description) VALUES (
+    'Basketball',
+    5,
+    'The game of basketball.'
+);
+
+INSERT INTO SportDescription(name, suggested_number_of_player, description) VALUES (
+    'Hockey',
+    6,
+    'The game of hockey.'
+);
+
+INSERT INTO SportDescription(name, suggested_number_of_player, description) VALUES (
+    'Baseball',
+    9,
+    'The game of baseball.'
+);
