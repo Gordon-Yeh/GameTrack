@@ -77,7 +77,7 @@ CREATE TABLE UserJoins(
   FOREIGN KEY(event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Message(
+CREATE TABLE Messages(
   message_id CHAR(32),
   sender_user_id CHAR(32) NOT NULL,
   receiver_user_id CHAR(32) NOT NULL,

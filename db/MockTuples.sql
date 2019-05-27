@@ -34,12 +34,12 @@ INSERT INTO Location VALUES ('abc104', 'V6R2J7', 'Dunbar Community Centre', '219
 INSERT INTO Location VALUES ('abc105', 'V6T1X1', 'Point Grey Community Centre', '4005 8 Avenue West');
 
 -- Message
-INSERT INTO Message VALUES ('4ae6d6198b044c36a228e2c8fd5cbe43', '21195d1680b611e9bc42526af7764f64', '11195d1680b611e9bc42526af7764f64', 'hi do you want to meet up and play some ball again?', '1558992568');
+INSERT INTO Messages VALUES ('4ae6d6198b044c36a228e2c8fd5cbe43', '21195d1680b611e9bc42526af7764f64', '11195d1680b611e9bc42526af7764f64', 'hi do you want to meet up and play some ball again?', '1558992568');
 
-INSERT INTO Message VALUES ('08616377a3e14e6cbd27c65af55660c5', '21195d1680b611e9bc42526af7764f64', '31195d1680b611e9bc42526af7764f64', 'hey where do you want to meet?', '1558992568');
+INSERT INTO Messages VALUES ('08616377a3e14e6cbd27c65af55660c5', '21195d1680b611e9bc42526af7764f64', '31195d1680b611e9bc42526af7764f64', 'hey where do you want to meet?', '1558992568');
 
-INSERT INTO Message VALUES ('4dab15eae4fd4f229b84ba99d4dc33b7', '41195d1680b611e9bc42526af7764f64', '11195d1680b611e9bc42526af7764f64', 'good game', '1558992568');
+INSERT INTO Messages VALUES ('4dab15eae4fd4f229b84ba99d4dc33b7', '41195d1680b611e9bc42526af7764f64', '11195d1680b611e9bc42526af7764f64', 'good game', '1558992568');
 
-INSERT INTO Message VALUES ('6fc4ea67a2cd41ca8ba7d169a2462a4d', '51195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'nice meeting you', '1558992568');
+INSERT INTO Messages VALUES ('6fc4ea67a2cd41ca8ba7d169a2462a4d', '51195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'nice meeting you', '1558992568');
 
-INSERT INTO Message VALUES ('67a89af1a3d14279805c17b24edefafe', '31195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'we should play again sometimes', '1558992568');
+INSERT INTO Messages VALUES ('67a89af1a3d14279805c17b24edefafe', '31195d1680b611e9bc42526af7764f64', '41195d1680b611e9bc42526af7764f64', 'we should play again sometimes', '1558992568');
