@@ -18,6 +18,7 @@ CREATE TABLE PostalCode(
 
 CREATE TABLE Location(
   location_id CHAR(32),
+  name CHAR(128),
   postal_code CHAR(6) NOT NULL,
   street_address VARCHAR(200) NOT NULL,
   PRIMARY KEY(location_id),
