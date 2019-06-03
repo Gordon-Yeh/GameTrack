@@ -1,3 +1,3 @@
 1.Download docker
 2. in the cmd line run: docker pull mysql
-3. run: docker run --name mysql-instance -e MYSQL_ROOT_PASSWORD=test -p 3306:3306 -p 33060:33060 -d mysql:latest
+3. run: docker run --name mysql-instance -e MYSQL_DATABASE=GAMETRACK -e MYSQL_ROOT_PASSWORD=test -p 3306:3306 -p 33060:33060 -d mysql:latest
