@@ -1,5 +1,6 @@
 import React from "react";
 import LoginPage from './LoginPage';
+import BrowseEventsPage from './BrowseEventsPage';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function Index() {
@@ -39,6 +40,7 @@ function AppRouter() {
         <Route path="/about/" component={About} />
         <Route path="/users/" component={Users} />
         <Route path="/login/" component={LoginPage} />
+        <Route path="/browseEvents" component={BrowseEventsPage} />
       </div>
     </Router>
   );
