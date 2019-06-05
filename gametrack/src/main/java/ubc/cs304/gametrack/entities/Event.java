@@ -12,8 +12,8 @@ public class Event {
     private UUID booking_id;
     private String sport;
 
-    public Event(UUID host_user_id, UUID booking_id) {
-        event_id = UUID.randomUUID();
+    public Event(UUID event_id, UUID host_user_id, UUID booking_id) {
+        this.event_id = event_id;
         this.host_user_id = host_user_id;
         this.booking_id = booking_id;
     }
@@ -44,10 +44,6 @@ public class Event {
 
     public UUID getBooking_id() {
         return booking_id;
-    }
-
-    public void setBooking_id(UUID booking_id) {
-        this.booking_id = booking_id;
     }
 
     public String getSport() {

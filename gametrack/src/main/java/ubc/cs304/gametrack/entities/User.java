@@ -12,8 +12,8 @@ public class User {
 
     private char sex;
 
-    public User() {
-        userid = UUID.randomUUID();
+    public User(UUID userid) {
+        this.userid = userid;
     }
 
     public UUID getUserid() {

@@ -8,8 +8,8 @@ public class Location {
     private String postal_code;
     private String street_address;
 
-    public Location(String name, String postal_code, String street_address) {
-        location_id = UUID.randomUUID();
+    public Location(UUID location_id, String name, String postal_code, String street_address) {
+        this.location_id = location_id;
         this.name = name;
         this.postal_code = postal_code;
         this.street_address = street_address;
