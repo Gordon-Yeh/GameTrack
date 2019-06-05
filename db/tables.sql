@@ -65,7 +65,7 @@ CREATE TABLE Team(
    name VARCHAR(32) NOT NULL,
    curr_size INTEGER NOT NULL,
    max_size INTEGER NOT NULL,
-   PRIMARY KEY (event_id, team_number),
+   PRIMARY KEY(event_id, team_number),
    FOREIGN KEY (event_id) REFERENCES Event ON DELETE CASCADE
 );
 
