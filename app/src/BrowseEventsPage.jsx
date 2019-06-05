@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 // import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
+import eventSample from './test-data/events.json'
 
 import './BrowseEventsPage.css'
 
@@ -24,9 +25,10 @@ class BrowseEventsPage extends React.Component {
                 <td>{event.createdBy}</td>
                 <td>{event.sport}</td>
                 <td>{event.locationName}</td>
-                <td>{event.dateAndTime.toUTCString()}</td>
+                <td>{new Date(event.dateAndTime).toUTCString()}</td>
                 <td>{event.noOfTeams}</td>
                 <td>{event.isTournament ? "Tournament" : "For Fun"}</td>
+                <td><Button type="button" className="twoButtons">View</Button></td>
             </tr>)
         });
 
@@ -222,18 +224,11 @@ class BrowseEventsPage extends React.Component {
                             <th>Date and Time</th>
                             <th>Number of teams</th>
                             <th>Tournament/For Fun</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.getRows([{
-                            name: "HeyHey",
-                            createdBy: "ali",
-                            sport: "Football",
-                            locationName: "Dunbar Community Centre",
-                            dateAndTime: new Date(),
-                            noOfTeams: 2,
-                            isTournament: true
-                        }])}
+                        {this.getRows(eventSample.events)}
                     </tbody>
                 </Table>
             </div>);
