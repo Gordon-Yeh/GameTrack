@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import BrowseEventsPage from './BrowseEventsPage';
+import MyEventsPage from './MyEventsPage'
 
-function Index() {
-  return <h2>Home</h2>;
-}
+// function Index() {
+//   return <h2>Home</h2>;
+// }
 
 function About() {
   return <h2>About</h2>;
@@ -39,6 +40,9 @@ function AppRouter() {
             </li> 
             <li>
               <Link to="/browseEvents/">Browse Events</Link>
+            </li>
+            <li>
+              <Link to="/myEvents/">My Events</Link>
             </li>          
           </ul>
         </nav>
@@ -49,6 +53,7 @@ function AppRouter() {
         <Route path="/login/" component={LoginPage} />
         <Route path="/signup/" component={SignupPage} />
         <Route path="/browseEvents" component={BrowseEventsPage} />
+        <Route path="/myEvents" component={MyEventsPage} />
       </div>
     </Router>
   );

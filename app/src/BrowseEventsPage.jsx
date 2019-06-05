@@ -10,6 +10,7 @@ import eventSample from './test-data/events.json'
 import EventTable from './EventTable'
 
 import './BrowseEventsPage.css'
+import './GlobalStyles.css'
 
 class BrowseEventsPage extends React.Component {
 
@@ -207,7 +208,7 @@ class BrowseEventsPage extends React.Component {
     }
     render() {
         return (
-            <div className="events-table">
+            <div className="main-content">
                 <Jumbotron>
                     <h1>Browse Events!</h1>
                     <p>

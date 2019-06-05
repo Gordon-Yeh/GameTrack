@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button'
-import './EventTable.css'
 
 class EventTable extends React.Component {
 
@@ -16,6 +15,7 @@ class EventTable extends React.Component {
                 <td>{new Date(event.dateAndTime).toUTCString()}</td>
                 <td>{event.noOfTeams}</td>
                 <td>{event.isTournament ? "Tournament" : "For Fun"}</td>
+                {/* TODO hookup button to a redirect */}
                 <td><Button type="button" className="twoButtons">View</Button></td>
             </tr>)
         });
@@ -25,7 +25,6 @@ class EventTable extends React.Component {
         );
     };
 
-    
     render() {
         return (
             <div>
