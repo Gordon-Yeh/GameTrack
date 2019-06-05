@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
+
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 // import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
 import eventSample from './test-data/events.json'
+import EventTable from './EventTable'
 
 import './BrowseEventsPage.css'
 
@@ -214,23 +215,7 @@ class BrowseEventsPage extends React.Component {
                     </p>
                 </Jumbotron>
                 {this.renderSearchBar()}
-                <Table bordered hover responsive>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Created By</th>
-                            <th>Sport</th>
-                            <th>Location</th>
-                            <th>Date and Time</th>
-                            <th>Number of teams</th>
-                            <th>Tournament/For Fun</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.getRows(eventSample.events)}
-                    </tbody>
-                </Table>
+                <EventTable events={eventSample.events} />
             </div>);
     };
 }
