@@ -197,7 +197,7 @@ class BrowseEventsPage extends React.Component {
                     </Form.Row>
                     {this.getDateSelector()}
                     <Button type="submit" className="twoButtons">Search</Button>
-                    <Button type="reset" className="twoButtons">Clear Filters</Button>
+                    <Button type="reset" className="twoButtons" disabled>Clear Filters</Button>
                 </Form>
             </Jumbotron>);
 

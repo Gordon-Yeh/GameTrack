@@ -36,6 +36,9 @@ function AppRouter() {
             </li>
             <li>
               <Link to="/signup/">signup</Link>
+            </li> 
+            <li>
+              <Link to="/browseEvents/">Browse Events</Link>
             </li>          
           </ul>
         </nav>
