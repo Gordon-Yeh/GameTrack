@@ -98,7 +98,3 @@ CREATE TABLE Invite(
   FOREIGN KEY(guest_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
   FOREIGN KEY(event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
-
-
-
-

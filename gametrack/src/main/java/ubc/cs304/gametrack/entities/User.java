@@ -1,15 +1,22 @@
 package ubc.cs304.gametrack.entities;
 
+import java.util.UUID;
+
 public class User {
-    private String userid, username, full_name, password, city, province;
+
+    private UUID userid;
+
+    private String username, full_name, password, city, province;
+
     private int age;
+
     private char sex;
 
-    public User(String userid) {
+    public User(UUID userid) {
         this.userid = userid;
     }
 
-    public String getUserid() {
+    public UUID getUserid() {
         return userid;
     }
 
