@@ -1,7 +1,8 @@
 import React from "react";
-import LoginPage from './pages/LoginPage';
-import BrowseEventsPage from './BrowseEventsPage';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import BrowseEventsPage from './BrowseEventsPage';
 
 function Index() {
   return <h2>Home</h2>;
@@ -32,14 +33,18 @@ function AppRouter() {
             </li>
             <li>
               <Link to="/login/">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup/">signup</Link>
             </li>          
           </ul>
         </nav>
 
-        <Route path="/" exact component={Index} />
+        <Route path="/" exact component={SignupPage} />
         <Route path="/about/" component={About} />
         <Route path="/users/" component={Users} />
         <Route path="/login/" component={LoginPage} />
+        <Route path="/signup/" component={SignupPage} />
         <Route path="/browseEvents" component={BrowseEventsPage} />
       </div>
     </Router>
