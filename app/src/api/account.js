@@ -1,10 +1,12 @@
+import messageSamples from '../test-data/messages.json';
+
 /**
  * Attempts to login with the given user info
  * @param {String} username 
  * @param {String} password
  * @return {Promise} 
  */
-function login(username, password) {
+export function login(username, password) {
   return new Promise((resolve, reject) => {
     // TODO: add real api call when server is set up
     let fakeCall = setTimeout(() => {
@@ -21,7 +23,7 @@ function login(username, password) {
  * Attempts to create a new account with the given user info
  * @param {Object} userInfo 
  */
-function signup(userInfo) {
+export function signup(userInfo) {
   return new Promise((resolve, reject) => {
     // TODO: add real api call when server is set up
     let fakeCall = setTimeout(() => {
@@ -34,7 +36,10 @@ function signup(userInfo) {
   });
 }
 
-module.exports = {
-  login,
-  signup
-};
+export function getMessages() {
+  return new Promise((resolve, reject) => {
+    let fakeCall = setTimeout(() => {
+      resolve(messageSamples);
+    }, 200);
+  });
+}
