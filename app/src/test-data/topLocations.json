@@ -1,0 +1,9 @@
+    {
+        "locations": [{
+            "name": "Dunbar Community Centre",
+            "rank": 1,
+            "address": "Somewhere in Dunbar duh!",
+            "postalCode": "V1A 1A1",
+            "noOfEvents": 1000000
+        }]
+    }

@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import BrowseEventsPage from './BrowseEventsPage';
 import MyEventsPage from './MyEventsPage'
+import LeaderboardsPage from './LeaderbooardsPage'
 
 // function Index() {
 //   return <h2>Home</h2>;
@@ -43,7 +44,10 @@ function AppRouter() {
             </li>
             <li>
               <Link to="/myEvents/">My Events</Link>
-            </li>          
+            </li>
+            <li>
+              <Link to="/leaderboards/">Leaderboards</Link>
+            </li>
           </ul>
         </nav>
 
@@ -54,6 +58,7 @@ function AppRouter() {
         <Route path="/signup/" component={SignupPage} />
         <Route path="/browseEvents" component={BrowseEventsPage} />
         <Route path="/myEvents" component={MyEventsPage} />
+        <Route path="/leaderboards" component={LeaderboardsPage} />
       </div>
     </Router>
   );
