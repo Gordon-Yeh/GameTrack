@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import BrowseEventsPage from './BrowseEventsPage';
-import MyEventsPage from './MyEventsPage'
-import LeaderboardsPage from './LeaderbooardsPage'
+import MyEventsPage from './MyEventsPage';
+import LeaderboardsPage from './LeaderbooardsPage';
+import CreateEventPage from './pages/CreateEventPage';
 
 // function Index() {
 //   return <h2>Home</h2>;
@@ -48,6 +49,9 @@ function AppRouter() {
             <li>
               <Link to="/leaderboards/">Leaderboards</Link>
             </li>
+            <li>
+              <Link to="/createEvent/">Create Events</Link>
+            </li>
           </ul>
         </nav>
 
@@ -59,6 +63,7 @@ function AppRouter() {
         <Route path="/browseEvents" component={BrowseEventsPage} />
         <Route path="/myEvents" component={MyEventsPage} />
         <Route path="/leaderboards" component={LeaderboardsPage} />
+        <Route path="/createEvent/" component={CreateEventPage} />
       </div>
     </Router>
   );
