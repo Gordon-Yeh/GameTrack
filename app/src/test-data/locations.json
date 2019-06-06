@@ -1,0 +1,34 @@
+[
+  {
+    "locationId": "b08c5637-9032-417f-81aa-96c5c0e6be50",
+    "name": "Dunbar Community Centre, Court #1",
+    "province": "BC",
+    "city": "Vancouver",
+    "postalCode": "V6S2H2",
+    "streetAddress": "4747 Dunbar St"
+  },
+  {
+    "locationId": "a6b71044-72ac-4a3d-aec9-a5ffa4171969",
+    "name": "Dunbar Community Centre, Court #2",
+    "province": "BC",
+    "city": "Vancouver",
+    "postalCode": "V6S2H2",
+    "streetAddress": "4747 Dunbar St"
+  },
+  {
+    "locationId": "5251d66c-b259-48a0-b570-68628ab7d86c",
+    "name": "UBC Rec, Court #2",
+    "province": "BC",
+    "city": "Vancouver",
+    "postalCode": "V6T 1Z1",
+    "streetAddress": "6000 Student Union Blvd"
+  },
+  {
+    "locationId": "8b87ccb4-11b3-4660-a204-18617974f031",
+    "name": "UBC Rec, Court #2",
+    "province": "BC",
+    "city": "Vancouver",
+    "postalCode": "V6T 1Z1",
+    "streetAddress": "6000 Student Union Blvd"
+  }
+]
