@@ -6,6 +6,9 @@ import BrowseEventsPage from './BrowseEventsPage';
 import MyEventsPage from './MyEventsPage';
 import LeaderboardsPage from './LeaderbooardsPage';
 import CreateEventPage from './pages/CreateEventPage';
+import InboxPage from "./pages/InboxPage";
+import InvitesPage from "./InvitesPage"
+
 
 // function Index() {
 //   return <h2>Home</h2>;
@@ -52,6 +55,12 @@ function AppRouter() {
             <li>
               <Link to="/createEvent/">Create Events</Link>
             </li>
+            <li>
+              <Link to="/inbox/">Inbox</Link>
+            </li>
+            <li>
+              <Link to="/invites/">Invites</Link>
+            </li>
           </ul>
         </nav>
 
@@ -64,6 +73,8 @@ function AppRouter() {
         <Route path="/myEvents" component={MyEventsPage} />
         <Route path="/leaderboards" component={LeaderboardsPage} />
         <Route path="/createEvent/" component={CreateEventPage} />
+        <Route path="/inbox/" component={InboxPage} />
+        <Route path="/invites/" component={InvitesPage} />
       </div>
     </Router>
   );
