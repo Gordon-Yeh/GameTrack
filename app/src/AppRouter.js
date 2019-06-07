@@ -9,6 +9,7 @@ import CreateEventPage from './pages/CreateEventPage';
 import InboxPage from "./pages/InboxPage";
 import InvitesPage from "./InvitesPage"
 import EventPage from "./EventPage"
+import DraftMessagePage from "./pages/DraftMessagePage";
 
 // function Index() {
 //   return <h2>Home</h2>;
@@ -64,6 +65,9 @@ function AppRouter() {
             <li>
               <Link to="/Event/">Event</Link>
             </li>
+            <li>
+              <Link to="/draftmessage/">draftmessage</Link>
+            </li>
           </ul>
         </nav>
 
@@ -79,6 +83,7 @@ function AppRouter() {
         <Route path="/inbox/" component={InboxPage} />
         <Route path="/invites/" component={InvitesPage} />
         <Route path="/Event/" component={EventPage} />
+        <Route path="/draftmessage/" component={DraftMessagePage} />
       </div>
     </Router>
   );
