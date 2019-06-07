@@ -1,0 +1,28 @@
+.main-content {
+    width: 90%;
+    margin: auto;
+    display: flex;
+}
+
+.teams{
+    margin-left: 30pt;
+    margin-right: auto;
+    width: 50%;
+    
+}
+
+.table{
+    text-align: center;
+}
+
+.event-info {
+    width: 33%;
+    height: 10%;
+    margin-bottom: 30pt;
+}
+
+.invite{
+    width: 33%;
+    margin-left: 30pt;
+    height: 10%;
+}

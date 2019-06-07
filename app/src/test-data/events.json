@@ -6,7 +6,22 @@
         "locationName": "Dunbar Community Centre",
         "dateAndTime": "2019-06-05T19:44:39.417Z",
         "noOfTeams": 2,
-        "isTournament": true
+        "isTournament": true,
+        "sportDescription": "The sport of soccer (called football in most of the world) is considered to be the world's most popular sport. In soccer there are two teams of eleven players. Soccer is played on a large grass field with a goal at each end. The object of the game is to get the soccer ball into the opposing team's goal.",
+        "teams": [
+            {
+                "name": "Team 1",
+                "currentSize": 2,
+                "capacity": 5,
+                "members": ["Ali", "Gordon"]
+            },
+            {
+                "name": "Team 2",
+                "currentSize": 1,
+                "capacity": 5,
+                "members": ["Not Ali"]
+            }
+        ]
     },{
         "name": "HeyHo",
         "createdBy": "notAli",
@@ -14,6 +29,21 @@
         "locationName": "Not Dunbar Community Centre",
         "dateAndTime": "2019-01-05T12:44:39.417Z",
         "noOfTeams": 10,
-        "isTournament": false
+        "isTournament": false,
+        "sportDescription": "The sport of soccer (called football in most of the world) is considered to be the world's most popular sport. In soccer there are two teams of eleven players. Soccer is played on a large grass field with a goal at each end. The object of the game is to get the soccer ball into the opposing team's goal.",
+        "teams": [
+            {
+                "name": "Team 1",
+                "currentSize": 2,
+                "capacity": 5,
+                "members": ["Ali", "Gordon"]
+            },
+            {
+                "name": "Team 2",
+                "currentSize": 1,
+                "capacity": 5,
+                "members": ["Not Ali"]
+            }
+        ]
     }]
 }
