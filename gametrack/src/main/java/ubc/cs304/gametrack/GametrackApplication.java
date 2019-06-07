@@ -13,6 +13,9 @@ public class GametrackApplication {
         SpringApplication.run(GametrackApplication.class, args);
     }
 
+    /* I had issues with creating tables from here, so I just initialized them with SQuirreL.
+    *  Go ahead and add the execute statement here if you can get it working.*/
+
 //
 //    @Autowired
 //    JdbcTemplate jdbcTemplate;
