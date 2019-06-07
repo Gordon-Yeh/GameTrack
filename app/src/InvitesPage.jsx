@@ -14,7 +14,7 @@ class InvitesPage extends React.Component {
                 <td>{invite.eventName}</td>
                 <td>{invite.sport}</td>
                 <td>{invite.eventLocationName}</td>
-                <td>{new Date(invite.eventDateAndTime).toUTCString()}</td>
+                <td>{new Date(Number(invite.eventDateAndTime)).toUTCString()}</td>
                 <td>{invite.eventIsTournament ? "Tournament" : "For Fun"}</td>
                 {/* TODO hookup button to a redirect */}
                 <td><Button type="button" className="twoButtons">View</Button></td>
