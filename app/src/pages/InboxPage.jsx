@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
-import { Jumbotron, Container, Row, Col, Alert, Table } from 'react-bootstrap';
+import { Jumbotron, Button, Alert, Table } from 'react-bootstrap';
 import { getMessages } from '../api/account';
 
 const errorMessages = {
@@ -13,7 +13,20 @@ class InboxPage extends React.Component {
     this.state = {
       error: null,
       messages: [],
+      replying: false,
+      replyReceiver: null,
+      replyTitle: null
     };
+
+    this.handleReply = this.handleReply.bind(this);
+  }
+
+  handleReply(message) {
+    this.setState({
+      replying: true,
+      replyReceiver: message.senderUsername,
+      replyTitle: `Re: ${message.title}`
+    });
   }
 
   componentDidMount() {
@@ -28,6 +41,15 @@ class InboxPage extends React.Component {
 
   render() {
     const { error, messages } = this.state;
+    const { replying, replyReceiver, replyTitle } = this.state;
+
+    if (replying) {
+      return (
+        <Redirect to={{
+          pathname: '/draftmessage',
+          state: { receiver: replyReceiver, title: replyTitle }
+        }}/>);
+    }
 
     return (
       <div className="main-content">
@@ -52,6 +74,7 @@ class InboxPage extends React.Component {
               <th>Title</th>
               <th>Content</th>
               <th>Date / Time</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -67,6 +90,14 @@ class InboxPage extends React.Component {
                 <td>{m.title}</td>
                 <td>{m.content}</td>
                 <td>{new Date(Number(m.timestamp)).toISOString()}</td>
+                <td>
+                  <Button 
+                    variant="secondary"
+                    onClick={() => this.handleReply(m)}
+                  >
+                    Reply
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>

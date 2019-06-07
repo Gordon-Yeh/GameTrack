@@ -1,22 +1,22 @@
 [
   {
     "messageId": "3769c929-e911-4900-87a6-c52ed8875889",
-    "senderUsername": "Bob Johnson",
-    "senderFullName": "bob_john",
+    "senderFullName": "Bob Johnson",
+    "senderUsername": "bob_john",
     "title": "hey!",
     "content": "want to meet up and play some ball again?",
     "timestamp": "1559844067622"
   }, {
     "messageId": "6e6d9557-fb69-475b-b84f-bca718c79370",
-    "senderUsername": "Moe Smith",
-    "senderFullName": "moemoemoe",
+    "senderFullName": "Moe Smith",
+    "senderUsername": "moemoemoe",
     "title": "meeting location",
     "content": "hey where do you want to meet?",
     "timestamp": "1559843067622"
     }, {
     "messageId": "d25a4919-67c6-4bdf-922b-4760faab29e0",
-    "senderUsername": "Joe Ross",
-    "senderFullName": "rossjoe",
+    "senderFullName": "Joe Ross",
+    "senderUsername": "rossjoe",
     "title": "event time",
     "content": "hi im going to be a bit late to the event",
     "timestamp": "1559842067622"

@@ -100,7 +100,7 @@ class InboxPage extends React.Component {
             <Form.Label>Content</Form.Label>
             <Form.Control
               as="textarea"
-              rows="8`"
+              rows="8"
               type="text" 
               value={content}
               onChange={this.handleContentChange}
