@@ -43,3 +43,11 @@ export function getMessages() {
     }, 200);
   });
 }
+
+export function sendMessage() {
+  return new Promise((resolve, reject) => {
+    let fakeCall = setTimeout(() => {
+      resolve();
+    }, 200);
+  });
+}
