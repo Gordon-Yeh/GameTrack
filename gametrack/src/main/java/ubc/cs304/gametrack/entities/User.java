@@ -4,20 +4,31 @@ import java.util.UUID;
 
 public class User {
 
-    private UUID userid;
+    private UUID user_id;
 
     private String username, full_name, password, city, province;
 
     private int age;
 
-    private char sex;
+    private String sex;
 
-    public User(UUID userid) {
-        this.userid = userid;
+    public User() {
+
+    }
+
+    public User(UUID user_id, String username, String full_name, String password, String city, String province, int age, String sex) {
+        this.user_id = user_id;
+        this.username = username;
+        this.full_name = full_name;
+        this.password = password;
+        this.city = city;
+        this.province = province;
+        this.age = age;
+        this.sex = sex;
     }
 
     public UUID getUserid() {
-        return userid;
+        return user_id;
     }
 
     public String getUsername() {
@@ -52,11 +63,11 @@ public class User {
         this.age = age;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
