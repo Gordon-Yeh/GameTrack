@@ -5,6 +5,9 @@ public class PostalCode {
     private String province;
     private String city;
 
+    public PostalCode() {
+    }
+
     public PostalCode(String postal_code, String province, String city) {
         this.postal_code = postal_code;
         this.province = province;
@@ -15,11 +18,23 @@ public class PostalCode {
         return postal_code;
     }
 
+    public void setPostal_code(String postal_code) {
+        this.postal_code = postal_code;
+    }
+
     public String getProvince() {
         return province;
     }
 
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -1,4 +1,4 @@
-CREATE TABLE Users(
+CREATE TABLE User(
    user_id VARCHAR(255) PRIMARY KEY,
    username VARCHAR(80) UNIQUE,
    full_name VARCHAR(255),
@@ -79,7 +79,7 @@ CREATE TABLE UserJoins(
   FOREIGN KEY(event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Messages(
+CREATE TABLE Message(
   message_id VARCHAR(255),
   sender_user_id VARCHAR(255) NOT NULL,
   receiver_user_id VARCHAR(255) NOT NULL,

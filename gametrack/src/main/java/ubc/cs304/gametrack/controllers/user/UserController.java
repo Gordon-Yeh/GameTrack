@@ -1,4 +1,4 @@
-package ubc.cs304.gametrack.controllers;
+package ubc.cs304.gametrack.controllers.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +12,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(method=RequestMethod.POST, value="/register")
+    @RequestMapping(method=RequestMethod.POST, value="/users")
     public void registerUser(@RequestBody User user) {
-        userService.registerUser(user);
+        userService.createUser(user);
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/register")
+    @RequestMapping(method=RequestMethod.GET, value="/users")
     public List<User> getAllUsers() {
         return userService.findAllUsers();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/register/{username}")
+    @RequestMapping(method=RequestMethod.GET, value="/users/{username}")
     public User findUser(@PathVariable String username) {
         return userService.findUserBy(username);
     }

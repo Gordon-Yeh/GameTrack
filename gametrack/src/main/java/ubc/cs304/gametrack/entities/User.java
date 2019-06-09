@@ -13,7 +13,6 @@ public class User {
     private String sex;
 
     public User() {
-
     }
 
     public User(UUID user_id, String username, String full_name, String password, String city, String province, int age, String sex) {
@@ -27,8 +26,12 @@ public class User {
         this.sex = sex;
     }
 
-    public UUID getUserid() {
+    public UUID getUser_id() {
         return user_id;
+    }
+
+    public void setUser_id(UUID user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
@@ -55,22 +58,6 @@ public class User {
         this.password = password;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String getCity() {
         return city;
     }
@@ -85,5 +72,21 @@ public class User {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

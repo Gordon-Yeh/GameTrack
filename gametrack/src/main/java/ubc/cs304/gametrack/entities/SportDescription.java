@@ -3,16 +3,25 @@ package ubc.cs304.gametrack.entities;
 import java.util.UUID;
 
 public class SportDescription {
-    private String name;
+    private String name; //PK
     private int suggested_number_of_players;
-    private UUID sport_id;
+    private UUID sport_id; //FK
 
-    public SportDescription(String name) {
+    public SportDescription() {
+    }
+
+    public SportDescription(String name, int suggested_number_of_players, UUID sport_id) {
         this.name = name;
+        this.suggested_number_of_players = suggested_number_of_players;
+        this.sport_id = sport_id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSuggested_number_of_players() {

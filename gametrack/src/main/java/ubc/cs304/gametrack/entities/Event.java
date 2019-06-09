@@ -12,10 +12,27 @@ public class Event {
     private UUID booking_id;
     private String sport;
 
-    public Event(UUID event_id, UUID host_user_id, UUID booking_id) {
+    public Event() {
+
+    }
+
+    public Event(UUID event_id, String name, int team_size, boolean is_a_tournament, int number_of_teams, UUID host_user_id, UUID booking_id, String sport) {
         this.event_id = event_id;
+        this.name = name;
+        this.team_size = team_size;
+        this.is_a_tournament = is_a_tournament;
+        this.number_of_teams = number_of_teams;
         this.host_user_id = host_user_id;
         this.booking_id = booking_id;
+        this.sport = sport;
+    }
+
+    public UUID getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(UUID event_id) {
+        this.event_id = event_id;
     }
 
     public String getName() {
@@ -42,8 +59,28 @@ public class Event {
         this.is_a_tournament = is_a_tournament;
     }
 
+    public int getNumber_of_teams() {
+        return number_of_teams;
+    }
+
+    public void setNumber_of_teams(int number_of_teams) {
+        this.number_of_teams = number_of_teams;
+    }
+
+    public UUID getHost_user_id() {
+        return host_user_id;
+    }
+
+    public void setHost_user_id(UUID host_user_id) {
+        this.host_user_id = host_user_id;
+    }
+
     public UUID getBooking_id() {
         return booking_id;
+    }
+
+    public void setBooking_id(UUID booking_id) {
+        this.booking_id = booking_id;
     }
 
     public String getSport() {
@@ -52,25 +89,5 @@ public class Event {
 
     public void setSport(String sport) {
         this.sport = sport;
-    }
-
-    public UUID getEvent_id() {
-        return event_id;
-    }
-
-    public int getNumber_of_teams() {
-        return number_of_teams;
-    }
-
-    public UUID getHost_user_id() {
-        return host_user_id;
-    }
-
-    public void addTeamSize() {
-        number_of_teams++;
-    }
-
-    public void subTeamSize() {
-        number_of_teams--;
     }
 }
