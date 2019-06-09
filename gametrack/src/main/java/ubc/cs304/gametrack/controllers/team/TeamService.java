@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ubc.cs304.gametrack.entities.Team;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -31,13 +32,26 @@ public class TeamService {
                 new BeanPropertyRowMapper(Team.class));
     }
 
-    Team findTeamById(String event_id) {
+    Team findTeamById(String event_id, int team_number) {
         List<Team> teams = findAllTeams();
-        return teams.stream().filter(t -> t.getEvent_id().toString().equals(event_id)).findFirst().orElse(new Team());
+        return teams.stream().filter(t -> t.getEvent_id().toString().equals(event_id)).filter(t -> t.getTeam_number() == team_number).findFirst().orElse(new Team());
     }
 
+    List<Team> findAllTeamsById(String event_id) {
+        List<Team> teams = findAllTeams();
+        return teams.stream().filter(t -> t.getEvent_id().toString().equals(event_id)).collect(Collectors.toList());
+//        return jdbcTemplate.query("SELECT event_id,team_number,name,curr_size,max_size FROM Team WHERE event_id = '" +
+//                event_id +
+//                "'",
+//                new BeanPropertyRowMapper(Team.class));
+    }
     Team findTeamByName(String name) {
         List<Team> teams = findAllTeams();
         return teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElse(new Team());
     }
+
+    void deleteTeam(String event_id, int team_number) {
+        jdbcTemplate.update("DELETE FROM Team WHERE event_id = ? AND team_number = ?", event_id, team_number);
+    }
+
 }

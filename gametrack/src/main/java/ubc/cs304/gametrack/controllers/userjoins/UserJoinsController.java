@@ -1,4 +1,4 @@
-package ubc.cs304.gametrack.controllers.team;
+package ubc.cs304.gametrack.controllers.userjoins;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -7,10 +7,10 @@ import ubc.cs304.gametrack.entities.Team;
 import java.util.List;
 
 @RestController
-public class TeamController {
+public class UserJoinsController {
 
     @Autowired
-    TeamService teamservice;
+    UserJoinsService teamservice;
 
     @RequestMapping(method= RequestMethod.POST, value="/teams")
     public void createTeam(@RequestBody Team team) {
