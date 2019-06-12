@@ -11,18 +11,6 @@ import InvitesPage from "./pages/InvitesPage"
 import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
 
-// function Index() {
-//   return <h2>Home</h2>;
-// }
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
-
 function AppRouter() {
   return (
     <Router>
@@ -31,12 +19,6 @@ function AppRouter() {
           <ul>
             <li>
               <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about/">About</Link>
-            </li>
-            <li>
-              <Link to="/users/">Users</Link>
             </li>
             <li>
               <Link to="/login/">Login</Link>
@@ -71,9 +53,7 @@ function AppRouter() {
           </ul>
         </nav>
 
-        <Route path="/" exact component={SignupPage} />
-        <Route path="/about/" component={About} />
-        <Route path="/users/" component={Users} />
+        <Route path="/" exact component={LoginPage} />
         <Route path="/login/" component={LoginPage} />
         <Route path="/signup/" component={SignupPage} />
         <Route path="/browseEvents" component={BrowseEventsPage} />
