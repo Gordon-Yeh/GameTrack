@@ -9,8 +9,6 @@ import Button from 'react-bootstrap/Button'
 import sampleLocationRankings from '../test-data/topLocations.json'
 import sampleUserRankings from '../test-data/userRankings.json'
 
-import '../GlobalStyles.css'
-
 class LeaderboardsPage extends React.Component {
 
     renderLocationsTable = (locations) => {

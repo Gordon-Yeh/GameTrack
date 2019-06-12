@@ -9,7 +9,6 @@ import eventSample from '../test-data/events.json'
 import EventTable from './EventTable'
 
 import './BrowseEventsPage.css'
-import '../GlobalStyles.css'
 
 class BrowseEventsPage extends React.Component {
 
