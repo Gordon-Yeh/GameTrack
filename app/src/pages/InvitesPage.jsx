@@ -2,7 +2,7 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import sampleInvites from './test-data/invites.json'
+import sampleInvites from '../test-data/invites.json'
 
 class InvitesPage extends React.Component {
 

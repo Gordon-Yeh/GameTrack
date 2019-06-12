@@ -2,9 +2,7 @@ import React from 'react';
 
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import EventTable from './EventTable'
-import eventSample from './test-data/events.json'
-
-import './GlobalStyles.css'
+import eventSample from '../test-data/events.json'
 
 class MyEventsPage extends React.Component {
 

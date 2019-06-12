@@ -6,10 +6,8 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
-import sampleLocationRankings from './test-data/topLocations.json'
-import sampleUserRankings from './test-data/userRankings.json'
-
-import './GlobalStyles.css'
+import sampleLocationRankings from '../test-data/topLocations.json'
+import sampleUserRankings from '../test-data/userRankings.json'
 
 class LeaderboardsPage extends React.Component {
 
