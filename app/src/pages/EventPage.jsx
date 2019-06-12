@@ -119,7 +119,7 @@ class EventPage extends React.Component {
 
     render() {
         return (
-            <div className="main-content">
+            <div className="main-content d-flex">
                 {this.getSideBar(eventSample.events[0])}
                 <div className="teams">
                     {this.getTeams(eventSample.events[0].teams)}
