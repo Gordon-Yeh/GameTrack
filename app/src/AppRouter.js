@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import BrowseEventsPage from './BrowseEventsPage';
-import MyEventsPage from './MyEventsPage';
-import LeaderboardsPage from './LeaderbooardsPage';
+import BrowseEventsPage from './pages/BrowseEventsPage';
+import MyEventsPage from './pages/MyEventsPage';
+import LeaderboardsPage from './pages/LeaderbooardsPage';
 import CreateEventPage from './pages/CreateEventPage';
 import InboxPage from "./pages/InboxPage";
-import InvitesPage from "./InvitesPage"
-import EventPage from "./EventPage"
+import InvitesPage from "./pages/InvitesPage"
+import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
 
 // function Index() {

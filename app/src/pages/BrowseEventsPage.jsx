@@ -5,11 +5,11 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import eventSample from './test-data/events.json'
+import eventSample from '../test-data/events.json'
 import EventTable from './EventTable'
 
 import './BrowseEventsPage.css'
-import './GlobalStyles.css'
+import '../GlobalStyles.css'
 
 class BrowseEventsPage extends React.Component {
 

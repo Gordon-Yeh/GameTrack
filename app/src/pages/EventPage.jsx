@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import eventSample from './test-data/events.json'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 
+import eventSample from '../test-data/events.json'
 import './EventPage.css'
 
 class EventPage extends React.Component {
