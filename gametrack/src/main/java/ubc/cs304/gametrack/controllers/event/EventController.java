@@ -26,5 +26,10 @@ public class EventController {
     public Event findEvent(@PathVariable String event_id) {
         return eventService.findEventBy(event_id);
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/events/user_id={user_id}")
+    public List<Event> findEventsCreatedBy(@PathVariable String user_id) {
+        return eventService.findEventsByHost(user_id);
+    }
 
 }

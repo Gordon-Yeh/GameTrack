@@ -55,7 +55,7 @@ CREATE TABLE Event(
    host_user_id VARCHAR(255) NOT NULL,
    booking_id VARCHAR(255) NOT NULL,
    sport char(32),
-   FOREIGN KEY (host_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+   FOREIGN KEY (host_user_id) REFERENCES User(user_id) ON DELETE CASCADE,
    FOREIGN KEY (booking_id) REFERENCES LocationBooking(booking_id) ON DELETE CASCADE,
    FOREIGN KEY (sport) REFERENCES SportDescription(name) ON DELETE SET NULL
 );
@@ -75,7 +75,7 @@ CREATE TABLE UserJoins(
   event_id VARCHAR(255),
   team_number INTEGER,
   PRIMARY KEY(user_id, event_id, team_number),
-  FOREIGN KEY(user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE,
   FOREIGN KEY(event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
 
@@ -84,10 +84,10 @@ CREATE TABLE Message(
   sender_user_id VARCHAR(255) NOT NULL,
   receiver_user_id VARCHAR(255) NOT NULL,
   content VARCHAR(128) NOT NULL,
-  message_timestamp TIMESTAMP NOT NULL,
+  message_timestamp BIGINT NOT NULL,
   PRIMARY KEY(message_id),
-  FOREIGN KEY(sender_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-  FOREIGN KEY(receiver_user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+  FOREIGN KEY(sender_user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+  FOREIGN KEY(receiver_user_id) REFERENCES User(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Invite(
@@ -95,7 +95,7 @@ CREATE TABLE Invite(
   guest_user_id VARCHAR(255),
   event_id VARCHAR(255),
   PRIMARY KEY(host_user_id, guest_user_id, event_id),
-  FOREIGN KEY(host_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-  FOREIGN KEY(guest_user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY(host_user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+  FOREIGN KEY(guest_user_id) REFERENCES User(user_id) ON DELETE CASCADE,
   FOREIGN KEY(event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
