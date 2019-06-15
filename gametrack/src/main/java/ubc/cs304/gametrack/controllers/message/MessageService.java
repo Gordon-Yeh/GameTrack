@@ -25,10 +25,9 @@ public class MessageService {
         message.getMessage_timestamp());
     }
 
-    @SuppressWarnings("unchecked")
     List<Message> findAllMessages() {
         return jdbcTemplate.query("SELECT message_id,sender_user_id,receiver_user_id,content,message_timestamp FROM Message",
-                new BeanPropertyRowMapper(Message.class));
+                new BeanPropertyRowMapper<Message>(Message.class));
     }
 
     Message findMessageById(String message_id) {
@@ -38,11 +37,11 @@ public class MessageService {
 
     List<Message> findMessagesBySender(String sender_id) {
         return jdbcTemplate.query("SELECT message_id,sender_user_id,receiver_user_id,content,message_timestamp FROM Message WHERE sender_user_id = '" + sender_id + "'",
-                new BeanPropertyRowMapper(Message.class));
+                new BeanPropertyRowMapper<Message>(Message.class));
     }
 
     List<Message> findMessagesByReceiver(String receiver_id) {
         return jdbcTemplate.query("SELECT message_id,sender_user_id,receiver_user_id,content,message_timestamp FROM Message WHERE receiver_user_id = '" + receiver_id + "'",
-                new BeanPropertyRowMapper(Message.class));
+                new BeanPropertyRowMapper<Message>(Message.class));
     }
 }

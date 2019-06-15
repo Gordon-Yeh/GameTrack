@@ -1,7 +1,6 @@
 package ubc.cs304.gametrack.entities;
 
 import java.sql.Timestamp;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Event {

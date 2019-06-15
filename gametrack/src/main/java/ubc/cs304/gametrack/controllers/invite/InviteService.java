@@ -23,10 +23,9 @@ public class InviteService {
 
     }
 
-    @SuppressWarnings("unchecked")
     List<Invite> findAllInvites() {
         return jdbcTemplate.query("SELECT host_user_id,guest_user_id,event_id FROM Invite",
-                new BeanPropertyRowMapper(Invite.class));
+                new BeanPropertyRowMapper<Invite>(Invite.class));
     }
 
     Invite findInviteByUser(String user_id) {

@@ -25,10 +25,9 @@ public class LocationService {
 
     }
 
-    @SuppressWarnings("unchecked")
     List<Location> findAllLocations() {
         return jdbcTemplate.query("SELECT location_id,name,postal_code,street_address FROM Location",
-                new BeanPropertyRowMapper(Location.class));
+                new BeanPropertyRowMapper<Location>(Location.class));
     }
 
     Location findLocationBy(String location_id) {

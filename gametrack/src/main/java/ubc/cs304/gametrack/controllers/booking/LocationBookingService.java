@@ -24,10 +24,9 @@ public class LocationBookingService {
                 locationBooking.getLocation_id() );
     }
 
-    @SuppressWarnings("unchecked")
     List<LocationBooking> findAllLocationBookings() {
         return jdbcTemplate.query("SELECT booking_id,start_time,end_time,location_id FROM LocationBooking;",
-                new BeanPropertyRowMapper(LocationBooking.class));
+                new BeanPropertyRowMapper<LocationBooking>(LocationBooking.class));
     }
 
     LocationBooking findLocationBookingBy(String booking_id) {

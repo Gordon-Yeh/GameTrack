@@ -23,10 +23,9 @@ public class PostalCodeService {
 
     }
 
-    @SuppressWarnings("unchecked")
     List<PostalCode> findAllPostalCodes() {
         return jdbcTemplate.query("SELECT postal_code,province,city FROM PostalCode;",
-                new BeanPropertyRowMapper(PostalCode.class));
+                new BeanPropertyRowMapper<PostalCode>(PostalCode.class));
     }
 
     PostalCode findPostalCodeBy(String postal_code) {

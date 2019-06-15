@@ -28,10 +28,10 @@ public class UserService {
                 user.getAge(),
                 user.getSex());
     }
-    @SuppressWarnings("unchecked")
+    
     List<User> findAllUsers() {
         return jdbcTemplate.query("SELECT user_id, username, full_name, password, city, province, age, sex FROM User;",
-                new BeanPropertyRowMapper(User.class));
+                new BeanPropertyRowMapper<User>(User.class));
     }
 
     User findUserBy(String username) {

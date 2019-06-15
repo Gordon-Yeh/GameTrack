@@ -22,20 +22,18 @@ public class UserJoinsService {
                 userjoins.getTeam_number());
     }
 
-    @SuppressWarnings("unchecked")
     List<UserJoins> findAllUsersByEvent(String event_id) {
         return jdbcTemplate.query("SELECT user_id,event_id,team_number FROM UserJoins WHERE event_id = '" +
                 event_id +
                 "'",
-                new BeanPropertyRowMapper(UserJoins.class));
+                new BeanPropertyRowMapper<UserJoins>(UserJoins.class));
     }
 
-    @SuppressWarnings("unchecked")
     List<UserJoins> findAllUsersById(String user_id) {
         return jdbcTemplate.query("SELECT user_id,event_id,team_number FROM UserJoins WHERE user_id = '" +
                 user_id +
                 "'",
-                new BeanPropertyRowMapper(UserJoins.class));
+                new BeanPropertyRowMapper<UserJoins>(UserJoins.class));
     }
 
     void removeUser(String user_id, String event_id) {

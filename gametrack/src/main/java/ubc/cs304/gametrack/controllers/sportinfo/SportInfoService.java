@@ -24,10 +24,9 @@ public class SportInfoService {
 
     }
 
-    @SuppressWarnings("unchecked")
     List<SportInfo> findAllSportInfos() {
         return jdbcTemplate.query("SELECT sport_id,description,meta FROM SportInfo;",
-                new BeanPropertyRowMapper(SportInfo.class));
+                new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
     }
 
     SportInfo findSportInfoBy(String sport_id) {

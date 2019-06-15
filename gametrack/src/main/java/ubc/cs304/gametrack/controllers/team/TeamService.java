@@ -26,10 +26,9 @@ public class TeamService {
 
     }
 
-    @SuppressWarnings("unchecked")
     List<Team> findAllTeams() {
         return jdbcTemplate.query("SELECT event_id,team_number,name,curr_size,max_size FROM Team",
-                new BeanPropertyRowMapper(Team.class));
+                new BeanPropertyRowMapper<Team>(Team.class));
     }
 
     Team findTeamById(String event_id, int team_number) {
