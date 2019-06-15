@@ -1,5 +1,7 @@
 package ubc.cs304.gametrack.entities;
 
+import java.sql.Timestamp;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Event {
@@ -11,12 +13,15 @@ public class Event {
     private UUID host_user_id;
     private UUID booking_id;
     private String sport;
+    private String location_name;
+    private Timestamp start_date;
+	private Timestamp end_date;
 
-    public Event() {
+	public Event() {
 
     }
 
-    public Event(UUID event_id, String name, int team_size, boolean is_a_tournament, int number_of_teams, UUID host_user_id, UUID booking_id, String sport) {
+    public Event(UUID event_id, String name, int team_size, boolean is_a_tournament, int number_of_teams, UUID host_user_id, UUID booking_id, String sport, String location_name, Timestamp start_date, Timestamp end_date) {
         this.event_id = event_id;
         this.name = name;
         this.team_size = team_size;
@@ -25,6 +30,9 @@ public class Event {
         this.host_user_id = host_user_id;
         this.booking_id = booking_id;
         this.sport = sport;
+        this.location_name = location_name;
+        this.start_date = start_date;
+        this.end_date = end_date;
     }
 
     public UUID getEvent_id() {
@@ -90,4 +98,28 @@ public class Event {
     public void setSport(String sport) {
         this.sport = sport;
     }
+    
+	public String getLocation_name() {
+		return location_name;
+	}
+
+	public void setLocation_name(String location_name) {
+		this.location_name = location_name;
+	}
+	
+	public Timestamp getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Timestamp start_date) {
+		this.start_date = start_date;
+	}
+	
+	public Timestamp getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(Timestamp end_date) {
+		this.end_date = end_date;
+	}
 }
