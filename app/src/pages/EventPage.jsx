@@ -30,6 +30,7 @@ class EventPage extends React.Component {
                     <ListGroup.Item>
                         <h3>Max # of Teams: {event.noOfTeams}</h3>
                     </ListGroup.Item>
+                    {/* TODO add event creator, location and so on */}
                     <ListGroup.Item>
                         <Jumbotron>
                             <h4> Sport Description: </h4>

@@ -14,9 +14,10 @@ public class EventService {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	final String selectEventWithJoinQuery = "SELECT e.event_id, e.name, e.team_size, e.is_a_tournament, e.number_of_teams, e.host_user_id, e.booking_id, e.sport, lb.start_time as start_date, lb.end_time as end_date, l.name as location_name "
-			+ "FROM Event e, LocationBooking lb, Location l "
-			+ "WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id";
+	final String selectEventWithJoinQuery = "SELECT e.event_id, e.name, e.team_size, e.is_a_tournament, e.number_of_teams, e.host_user_id, e.booking_id, e.sport,"
+			+ " u.username as creator_username, lb.start_time as start_date, lb.end_time as end_date, l.name as location_name "
+			+ "FROM Event e, LocationBooking lb, Location l, User u "
+			+ "WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id";
 
 	void createEvent(Event event) {
 
@@ -29,9 +30,7 @@ public class EventService {
 
 	List<Event> findAllEvents() {
 		return jdbcTemplate.query(
-//				"SELECT event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport FROM Event;",
-				selectEventWithJoinQuery,
-				new BeanPropertyRowMapper<Event>(Event.class));
+				selectEventWithJoinQuery, new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
 	Event findEventBy(String event_id) {
@@ -44,5 +43,40 @@ public class EventService {
 		return jdbcTemplate
 				.query("SELECT event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport FROM Event WHERE host_user_id = '"
 						+ user_id + "'", new BeanPropertyRowMapper<Event>(Event.class));
+	}
+
+	List<Event> filterEvents(Filter filters) {
+		return jdbcTemplate.query(getQueryWithFilters(filters), new BeanPropertyRowMapper<Event>(Event.class));
+	}
+
+	private String getQueryWithFilters(Filter filters) {
+		if (filters != null) {
+			StringBuilder myQuery = new StringBuilder(selectEventWithJoinQuery);
+			if (filters.event_name != null)
+				myQuery.append(" AND e.name LIKE '%" + filters.event_name + "%'");
+
+			if (filters.created_by != null)
+				myQuery.append(" AND u.username LIKE '%" + filters.created_by + "%'");
+
+			if (filters.sport != null)
+				myQuery.append(" AND e.sport = '" + filters.sport + "'");
+
+			if (filters.location_name != null)
+				myQuery.append(" AND e.location_name LIKE '%" + filters.location_name + "%'");
+
+			if (filters.no_of_teams != 0)
+				myQuery.append(" AND number_of_teams = " + String.valueOf(filters.no_of_teams));
+
+			if (filters.is_a_tournament)
+				myQuery.append(" AND is_a_tournament > 0");
+			else
+				myQuery.append(" AND is_a_tournament = 0");
+
+			if (filters.start_day != 0 && filters.start_month != 0 && filters.start_year != 0)
+				myQuery.append(" AND DATE(start_time) = '" + String.valueOf(filters.start_year) + "-"
+						+ String.valueOf(filters.start_month) + "-" + String.valueOf(filters.start_day) + "'");
+			return myQuery.toString();
+		}
+		return selectEventWithJoinQuery;
 	}
 }
