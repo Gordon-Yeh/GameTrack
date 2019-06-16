@@ -20,7 +20,7 @@ public class EventService {
 			+ "WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id";
 
 	void createEvent(Event event) {
-
+		// TODO need to create teams too according to supplied no of teams, should be empty
 		jdbcTemplate.update(
 				"INSERT INTO Event (event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport) VALUES (?,?,?,?,?,?,?,?)",
 				UUID.randomUUID().toString(), event.getName(), event.getTeam_size(), event.isIs_a_tournament(),
