@@ -6,6 +6,8 @@ public class Invite {
     private UUID host_user_id;
     private UUID guest_user_id;
     private UUID event_id;
+    private Event event;
+    private User host;
 
     public Invite() {
     }
@@ -39,4 +41,20 @@ public class Invite {
     public void setEvent_id(UUID event_id) {
         this.event_id = event_id;
     }
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public User getHost() {
+		return host;
+	}
+
+	public void setHost(User host) {
+		this.host = host;
+	}
 }

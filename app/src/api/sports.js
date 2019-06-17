@@ -17,7 +17,6 @@ export async function getSports() {
  * get available sports 
  */
 export async function getSportInfo(sportName) {
-
     try {
         const res = await fetch(`/sportinfos/name/${sportName}`);
         const result = await res.json();

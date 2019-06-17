@@ -33,7 +33,7 @@ public class EventService {
 				selectEventWithJoinQuery, new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
-	Event findEventBy(String event_id) {
+	public Event findEventBy(String event_id) {
 		// TODO should be done in SQL
 		List<Event> events = findAllEvents();
 		return events.stream().filter(e -> e.getEvent_id().toString().equals(event_id)).findFirst().orElse(new Event());

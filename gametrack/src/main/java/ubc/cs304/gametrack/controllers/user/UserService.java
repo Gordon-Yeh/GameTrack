@@ -38,4 +38,9 @@ public class UserService {
          List<User> users = findAllUsers();
          return users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(new User());
     }
+    
+    public User findUserByUserId(String userId) {
+        List<User> users = findAllUsers();
+        return users.stream().filter(u -> u.getUser_id().toString().equals(userId)).findFirst().orElse(new User());
+   }
 }

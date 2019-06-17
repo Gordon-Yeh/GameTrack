@@ -142,3 +142,17 @@ export async function inviteUserToEvent(eventId, userId, recipientId) {
   }
 }
 
+// @RequestMapping(method=RequestMethod.GET, value="/invites_guest/{guest_id}")
+export async function getUsersInvites(userId) {
+  try {
+    const res = await fetch(`/invites_guest/${userId}`);
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+
