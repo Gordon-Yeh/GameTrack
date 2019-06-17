@@ -1,4 +1,5 @@
 import messageSamples from '../test-data/messages.json';
+import { API_ENDPOINT } from '../env.js';
 
 /**
  * Attempts to login with the given user info
@@ -25,14 +26,24 @@ export function login(username, password) {
  */
 export function signup(userInfo) {
   return new Promise((resolve, reject) => {
-    // TODO: add real api call when server is set up
-    let fakeCall = setTimeout(() => {
-      if (userInfo.username === 'admin') {
-        reject('USERNAME_ALREADY_EXIST');
-      } else {
+    fetch('/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInfo)
+      })
+    .then((res) => {
+      if (res.status === 200) {
         resolve();
+      } else {
+        console.log(res.statusText);
+        reject(res.statusText);
       }
-    }, 200);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   });
 }
 

@@ -1,0 +1,3 @@
+# RESTful API Server for the app
+to run the server...  
+`mvn spring-boot:run`
