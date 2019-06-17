@@ -12,25 +12,31 @@ import java.util.UUID;
 @Service
 public class SportInfoService {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
-    void createSportInfo(SportInfo sportInfo) {
+	void createSportInfo(SportInfo sportInfo) {
 
-        jdbcTemplate.update( "INSERT INTO SportInfo (sport_id,description,meta) VALUES (?,?,?) ",
-                            UUID.randomUUID().toString(),
-                            sportInfo.getDescription(),
-                            sportInfo.getMeta());
+		jdbcTemplate.update("INSERT INTO SportInfo (sport_id,description,meta) VALUES (?,?,?) ",
+				UUID.randomUUID().toString(), sportInfo.getDescription(), sportInfo.getMeta());
 
-    }
+	}
 
-    List<SportInfo> findAllSportInfos() {
-        return jdbcTemplate.query("SELECT sport_id,description,meta FROM SportInfo;",
-                new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
-    }
+	List<SportInfo> findAllSportInfos() {
+		return jdbcTemplate.query("SELECT sport_id,description,meta FROM SportInfo;",
+				new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
+	}
 
-    SportInfo findSportInfoBy(String sport_id) {
-        List<SportInfo> sportInfos = findAllSportInfos();
-        return sportInfos.stream().filter(si -> si.getSport_id().toString().equals(sport_id)).findFirst().orElse(new SportInfo());
-    }
+	SportInfo findSportInfoBy(String sport_id) {
+		List<SportInfo> sportInfos = findAllSportInfos();
+		return sportInfos.stream().filter(si -> si.getSport_id().toString().equals(sport_id)).findFirst()
+				.orElse(new SportInfo());
+	}
+
+	SportInfo findSportInfoBySportName(String sportName) {
+		List<SportInfo> matches = jdbcTemplate
+				.query("SELECT s.* FROM SportInfo s, SportDescription sd WHERE s.sport_id = sd.sport_id AND sd.name = '"
+						+ sportName + "'", new BeanPropertyRowMapper<SportInfo>(SportInfo.class));
+		return matches.stream().findFirst().orElse(new SportInfo());
+	}
 }

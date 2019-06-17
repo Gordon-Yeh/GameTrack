@@ -17,9 +17,9 @@ public class InviteService {
     void createInvite(Invite invite) {
 
         jdbcTemplate.update( "INSERT INTO Invite (host_user_id,guest_user_id,event_id) VALUES (?,?,?)",
-                                invite.getGuest_user_id(),
-                                invite.getGuest_user_id(),
-                                invite.getEvent_id());
+                                invite.getHost_user_id().toString(),
+                                invite.getGuest_user_id().toString(),
+                                invite.getEvent_id().toString());
 
     }
 

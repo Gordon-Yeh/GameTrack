@@ -6,7 +6,11 @@ public class UserJoins {
     private UUID user_id;
     private UUID event_id;
     private int team_number;
-
+    
+    public UserJoins() {
+    	
+    }
+    
     public UserJoins(UUID user_id, UUID event_id, int team_number) {
         this.user_id = user_id;
         this.event_id = event_id;

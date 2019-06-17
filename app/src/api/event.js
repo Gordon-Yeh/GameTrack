@@ -57,4 +57,88 @@ export async function getFilteredEvents(filters) {
   }
 }
 
+export async function getEventTeams(eventId) {
+  try {
+    const res = await fetch(`/teams/${eventId}`);
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+//	    private UUID user_id;
+//	    private UUID event_id;
+//	    private int team_number;
+
+export async function joinTeam(eventId, userId, teamNo) {
+  try {
+    let joinReq = {};
+    joinReq.event_id = eventId;
+    joinReq.user_id = userId;
+    joinReq.team_number = teamNo;
+    const res = await fetch("/userJoinsTeam", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(joinReq)
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function kickOutOfTeam(eventId, userId, teamNo) {
+  try {
+    let kickReq = {};
+    kickReq.event_id = eventId;
+    kickReq.user_id = userId;
+    kickReq.team_number = teamNo;
+    const res = await fetch("/kickOutOfTeam", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(kickReq)
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function inviteUserToEvent(eventId, userId, recipientId) {
+  try {
+    let invite = {};
+    invite.host_user_id = userId;
+    invite.guest_user_id = recipientId;
+    invite.event_id = eventId;
+    const res = await fetch("/invites", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(invite)
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
 
