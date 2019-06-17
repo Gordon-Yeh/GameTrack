@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import eventSample from '../test-data/events.json'
 import EventTable from './EventTable'
+import { getLocationsFromServer } from '../api/location';
 
 import './BrowseEventsPage.css'
 
@@ -14,7 +15,9 @@ class BrowseEventsPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { validated: false };
+        this.state = { validated: false, locations: [] };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        getLocationsFromServer().then(locations => console.log(locations));
     }
 
     getRows = (dataSource) => {
@@ -36,6 +39,11 @@ class BrowseEventsPage extends React.Component {
             rows
         );
     };
+
+    handleSubmit(e) {
+        // TODO 
+    }
+    
 
     getDateSelector = () => {
         return (

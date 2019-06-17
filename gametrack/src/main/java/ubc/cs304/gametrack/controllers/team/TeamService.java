@@ -9,7 +9,6 @@ import ubc.cs304.gametrack.entities.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class TeamService {
@@ -44,9 +43,9 @@ public class TeamService {
 	}
 
 	List<Team> findAllTeamsById(String event_id) {
-		Stream<Team> teams = findAllTeams().stream().filter(t -> t.getEvent_id().toString().equals(event_id));
+		List<Team> teams = findAllTeams().stream().filter(t -> t.getEvent_id().toString().equals(event_id)).collect(Collectors.toList());
 		teams.forEach(t -> t.setTeam_members(getTeamMembers(t.getEvent_id().toString(), t.getTeam_number())));
-		return teams.collect(Collectors.toList());
+		return teams;
 	}
 
 	Team findTeamByName(String name) {
