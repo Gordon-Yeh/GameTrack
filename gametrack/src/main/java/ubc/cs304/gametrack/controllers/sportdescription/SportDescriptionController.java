@@ -17,7 +17,7 @@ public class SportDescriptionController {
         sportDescriptionService.createSportDescription(sportDescription);
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/descriptions")
+    @RequestMapping(method=RequestMethod.GET, value="/sports")
     public List<SportDescription> getAllSportDescriptions() {
         return sportDescriptionService.findAllSportDescriptions();
     }

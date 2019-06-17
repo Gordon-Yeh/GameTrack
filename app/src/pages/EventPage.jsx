@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 
@@ -12,6 +11,18 @@ import eventSample from '../test-data/events.json'
 import './EventPage.css'
 
 class EventPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = this.props.location.state;
+        alert(this.state.event.name);
+        // this.handleSearch = this.handleSearch.bind(this);
+        // getLocationsFromServer().then(locs => this.setState({ locations: locs }));
+        // getSports().then(sports => this.setState({ sports: sports }));
+        // getAllEvents().then(e => {
+        //     this.setState({ events: e });
+        //     console.log(e);
+        // });
+    }
 
     getSideBar = (event) => {
         return (
@@ -25,10 +36,10 @@ class EventPage extends React.Component {
                         <h3>Sport: {event.sport}</h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <h3>{event.isTournament ? "Tournament" : "For Fun"}</h3>
+                        <h3>{event.is_a_tournament ? "Tournament" : "For Fun"}</h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <h3>Max # of Teams: {event.noOfTeams}</h3>
+                        <h3>Max # of Teams: {event.number_of_teams}</h3>
                     </ListGroup.Item>
                     {/* TODO add event creator, location and so on */}
                     <ListGroup.Item>
@@ -121,7 +132,7 @@ class EventPage extends React.Component {
     render() {
         return (
             <div className="main-content d-flex">
-                {this.getSideBar(eventSample.events[0])}
+                {this.getSideBar(this.state.event)}
                 <div className="teams">
                     {this.getTeams(eventSample.events[0].teams)}
                 </div>

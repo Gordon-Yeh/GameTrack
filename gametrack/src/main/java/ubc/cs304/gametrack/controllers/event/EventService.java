@@ -52,24 +52,24 @@ public class EventService {
 	private String getQueryWithFilters(Filter filters) {
 		if (filters != null) {
 			StringBuilder myQuery = new StringBuilder(selectEventWithJoinQuery);
-			if (filters.event_name != null)
+			if (filters.event_name != null && !filters.event_name.isEmpty())
 				myQuery.append(" AND e.name LIKE '%" + filters.event_name + "%'");
 
-			if (filters.created_by != null)
+			if (filters.created_by != null && !filters.created_by.isEmpty())
 				myQuery.append(" AND u.username LIKE '%" + filters.created_by + "%'");
 
-			if (filters.sport != null)
+			if (filters.sport != null && !filters.sport.isEmpty())
 				myQuery.append(" AND e.sport = '" + filters.sport + "'");
 
-			if (filters.location_name != null)
-				myQuery.append(" AND e.location_name LIKE '%" + filters.location_name + "%'");
+			if (filters.location_name != null && !filters.location_name.isEmpty())
+				myQuery.append(" AND l.location_name LIKE '%" + filters.location_name + "%'");
 
 			if (filters.no_of_teams != 0)
 				myQuery.append(" AND number_of_teams = " + String.valueOf(filters.no_of_teams));
 
-			if (filters.is_a_tournament)
+			if (filters.is_a_tournament != null && filters.is_a_tournament.booleanValue())
 				myQuery.append(" AND is_a_tournament > 0");
-			else
+			else if(filters.is_a_tournament != null)
 				myQuery.append(" AND is_a_tournament = 0");
 
 			if (filters.start_day != 0 && filters.start_month != 0 && filters.start_year != 0)

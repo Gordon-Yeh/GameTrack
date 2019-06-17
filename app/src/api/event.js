@@ -18,3 +18,43 @@ export function createEvent(eventInfo) {
     }, 200);
   });
 }
+
+
+/**
+ * get all events 
+ */
+export async function getAllEvents() {
+  try {
+    const res = await fetch("/events");
+    const result = await res.json();
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+/**
+ * get all events 
+ */
+export async function getFilteredEvents(filters) {
+  try {
+    console.log(filters);
+    const res = await fetch("/events/filtered", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(filters)
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+

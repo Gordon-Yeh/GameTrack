@@ -32,7 +32,7 @@ public class EventController {
         return eventService.findEventsByHost(user_id);
     }
     
-    @RequestMapping(method=RequestMethod.GET, value="/events/filtered")
+    @RequestMapping(method=RequestMethod.POST, value="/events/filtered")
     public List<Event> findEventsByFilter(@RequestBody Filter filters) {
         return eventService.filterEvents(filters);
     }

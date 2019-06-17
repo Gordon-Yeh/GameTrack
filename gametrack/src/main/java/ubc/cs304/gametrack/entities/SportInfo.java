@@ -1,26 +1,24 @@
 package ubc.cs304.gametrack.entities;
 
-import java.util.UUID;
-
 public class SportInfo {
-    private UUID sport_id; //PK
+    private String sport_id; //PK
     private String description;
     private String meta;
 
     public SportInfo() {
     }
 
-    public SportInfo(UUID sport_id, String description, String meta) {
+    public SportInfo(String sport_id, String description, String meta) {
         this.sport_id = sport_id;
         this.description = description;
         this.meta = meta;
     }
 
-    public UUID getSport_id() {
+    public String getSport_id() {
         return sport_id;
     }
 
-    public void setSport_id(UUID sport_id) {
+    public void setSport_id(String sport_id) {
         this.sport_id = sport_id;
     }
 

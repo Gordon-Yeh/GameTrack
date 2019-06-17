@@ -27,7 +27,7 @@ public class Filter {
 	
 	@JsonProperty("is_a_tournament")
 	@Nullable
-	boolean is_a_tournament;
+	Boolean is_a_tournament;
 	
 	@JsonProperty("start_day")
 	int start_day;
