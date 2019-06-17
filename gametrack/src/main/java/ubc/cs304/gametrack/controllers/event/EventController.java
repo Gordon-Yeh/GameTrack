@@ -13,7 +13,7 @@ public class EventController {
     EventService eventService;
 
     @RequestMapping(method= RequestMethod.POST, value="/events")
-    public void registerUser(@RequestBody Event event) {
+    public void createEvent(@RequestBody Event event) {
         eventService.createEvent(event);
     }
 

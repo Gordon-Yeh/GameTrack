@@ -2,15 +2,20 @@ package ubc.cs304.gametrack.controllers.userjoins;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ubc.cs304.gametrack.entities.Team;
+import ubc.cs304.gametrack.entities.LeaderboardUser;
 
 import java.util.List;
 
 @RestController
 public class UserJoinsController {
 
-//    @Autowired
-//    UserJoinsService teamservice;
+    @Autowired
+    UserJoinsService userJoinsService;
+
+    @RequestMapping(method=RequestMethod.GET, value="/users/leaderboards")
+    public List<LeaderboardUser> getLeaderboard() {
+        return userJoinsService.getLeaderboard();
+    }
 //
 //    @RequestMapping(method= RequestMethod.POST, value="/teams")
 //    public void createTeam(@RequestBody Team team) {
