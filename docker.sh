@@ -1,12 +1,12 @@
-IMAGE="mysql"
+IMAGE="gametrack-db"
 DB_NAME="GAMETRACK"
 DB_DOCKER_INSTANCE_NAME="gametrack-db-instance"
 ROOT_PW="test"
 
 # build db for gametrack
-docker pull $IMAGE
+sudo docker build -t $IMAGE .
 
-# set up MySQL DB locally 
+# set up MySQL DB locally
 docker container stop $DB_DOCKER_INSTANCE_NAME
 docker rm $DB_DOCKER_INSTANCE_NAME
 docker run \
