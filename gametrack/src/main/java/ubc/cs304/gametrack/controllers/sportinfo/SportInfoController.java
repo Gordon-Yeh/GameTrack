@@ -22,9 +22,16 @@ public class SportInfoController {
         return sportInfoservice.findAllSportInfos();
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="/sportinfos/{sport_id}")
-    public SportInfo getSportInfoBy(@PathVariable String sport_id) {
-        return sportInfoservice.findSportInfoBy(sport_id);
+    @RequestMapping(method=RequestMethod.GET, value="/sportinfos/{sportId}")
+    public SportInfo getSportInfoBy(@PathVariable String sportId) {
+        return sportInfoservice.findSportInfoBy(sportId);
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/sportinfos/name/{sportName}")
+    public SportInfo getSportInfoByName(@PathVariable String sportName) {
+        return sportInfoservice.findSportInfoBySportName(sportName);
+    }
+    
+    
 
 }

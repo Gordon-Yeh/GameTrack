@@ -208,7 +208,6 @@ class BrowseEventsPage extends React.Component {
                     <Form.Row>
                         <Form.Group as={Col} event md="4" controlId="v3">
                             <Form.Label>Location</Form.Label>
-                            {/* { todo make it a dropdown to select from locations we have} */}
                             <Form.Control as="select" ref={this.state.filters.location_name}>
                                 {this.getLocationsOptions()}
                             </Form.Control>
