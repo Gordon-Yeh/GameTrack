@@ -3,6 +3,8 @@ package ubc.cs304.gametrack.controllers.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubc.cs304.gametrack.entities.User;
+import ubc.cs304.gametrack.entities.LoginForm;
+import ubc.cs304.gametrack.entities.SecuredUser;
 
 import java.util.List;
 
@@ -25,5 +27,10 @@ public class UserController {
     @RequestMapping(method=RequestMethod.GET, value="/users/{username}")
     public User findUser(@PathVariable String username) {
         return userService.findUserBy(username);
+    }
+
+    @RequestMapping(method=RequestMethod.POST, value="/users/login")
+    public SecuredUser login(@RequestBody LoginForm form) {
+        return userService.login(form.getUsername(), form.getPassword());
     }
 }
