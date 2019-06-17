@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import ubc.cs304.gametrack.entities.LeaderboardLocation;
 import ubc.cs304.gametrack.entities.Location;
 
 import java.util.List;
@@ -33,5 +34,12 @@ public class LocationService {
     Location findLocationBy(String location_id) {
         List<Location> locations = findAllLocations();
         return locations.stream().filter(l -> l.getLocation_id().toString().equals(location_id)).findFirst().orElse(new Location());
+    }
+
+    List<LeaderboardLocation> getLeaderboards() {
+        return jdbcTemplate.query("SELECT l.name, l.street_address, l.postal_code, count(lb.booking_id) AS no_of_events FROM Location l, LocationBooking lb " +
+                "WHERE l.location_id = lb.location_id " +
+                "GROUP BY l.name, l.street_address, l.postal_code " +
+                "ORDER BY count(lb.booking_id) DESC", new BeanPropertyRowMapper<LeaderboardLocation>(LeaderboardLocation.class));
     }
 }
