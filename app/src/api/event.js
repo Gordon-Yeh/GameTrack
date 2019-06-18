@@ -166,15 +166,3 @@ export async function getEventsUserJoined(userId) {
   }
 }
 
-export async function getUsersInAllEvents() {
-  try {
-    const res = await fetch("/users/allEvents");
-    const result = await res.json();
-    return result;
-  }
-  catch (error) {
-    console.log(error);
-  }
-}
-
-
