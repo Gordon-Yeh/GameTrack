@@ -1,5 +1,5 @@
 import messageSamples from '../test-data/messages.json';
-import { API_ENDPOINT } from '../env.js';
+import { storeSession } from '../session.js';
 
 /**
  * Attempts to login with the given user info
@@ -8,15 +8,31 @@ import { API_ENDPOINT } from '../env.js';
  * @return {Promise} 
  */
 export function login(username, password) {
+  let body = {
+    username,
+    password
+  };
+
   return new Promise((resolve, reject) => {
-    // TODO: add real api call when server is set up
-    let fakeCall = setTimeout(() => {
-      if (username !== 'admin' || password !== '123123') {
-        reject('DOES_NOT_EXIST');
+    fetch('/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        res.json().then(user => {
+          console.log(user);
+          storeSession(user)
+          resolve();
+        })
       } else {
-        resolve();
+        console.log(res.statusText);
+        reject(res.statusText);
       }
-    }, 200);
+    })
   });
 }
 

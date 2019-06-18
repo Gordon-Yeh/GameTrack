@@ -69,7 +69,7 @@ class LoginPage extends React.Component {
             
               {error && (
                 <Alert variant="danger">
-                  {errorMessages[error]}
+                  {Object.keys(errorMessages).indexOf(error) > -1 ? errorMessages[error] : error}
                 </Alert>
               )}
               <Form 
