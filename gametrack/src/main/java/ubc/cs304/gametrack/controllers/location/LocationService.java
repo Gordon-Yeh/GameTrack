@@ -36,9 +36,11 @@ public class LocationService {
         return locations.stream().filter(l -> l.getLocation_id().toString().equals(location_id)).findFirst().orElse(new Location());
     }
 
-    List<LeaderboardLocation> getLeaderboards() {
-        return jdbcTemplate.query("SELECT l.name, l.street_address, l.postal_code, count(lb.booking_id) AS no_of_events FROM Location l, LocationBooking lb " +
+    List<LeaderboardLocation> getLeaderboards(String sport) {
+        return jdbcTemplate.query("SELECT l.name, l.street_address, l.postal_code, count(lb.booking_id) AS no_of_events FROM Location l, LocationBooking lb, Event e " +
                 "WHERE l.location_id = lb.location_id " +
+                "AND lb.booking_id = e.booking_id " +
+                "AND e.sport = '" + sport + "' " +
                 "GROUP BY l.name, l.street_address, l.postal_code " +
                 "ORDER BY count(lb.booking_id) DESC", new BeanPropertyRowMapper<LeaderboardLocation>(LeaderboardLocation.class));
     }

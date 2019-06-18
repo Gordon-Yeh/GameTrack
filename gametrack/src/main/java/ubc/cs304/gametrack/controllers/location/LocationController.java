@@ -28,8 +28,8 @@ public class LocationController {
         return locationService.findLocationBy(location_id);
     }
 
-    @RequestMapping(method=RequestMethod.GET, value="locations/leaderboards")
-    public List<LeaderboardLocation> getLocationLeaderboards() {
-        return locationService.getLeaderboards();
+    @RequestMapping(method=RequestMethod.GET, value="locations/leaderboards/{sport}")
+    public List<LeaderboardLocation> getLocationLeaderboards(@PathVariable String sport) {
+        return locationService.getLeaderboards(sport);
     }
 }
