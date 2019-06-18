@@ -9,14 +9,16 @@ import Button from 'react-bootstrap/Button'
 import sampleLocationRankings from '../test-data/topLocations.json'
 import sampleUserRankings from '../test-data/userRankings.json'
 import { getSports } from '../api/sports';
+import { getUsersInAllEvents } from '../api/event'
 import { getSessionFromCookie } from '../session'
 
 class LeaderboardsPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { sports: [], currentUserId: getSessionFromCookie().user_id };
+        this.state = { sports: [], currentUserId: getSessionFromCookie().user_id, usersInAllEvents: [] };
         getSports().then(sports => this.setState({ sports: sports }));
+        getUsersInAllEvents().then(u => this.setState({ usersInAllEvents: u }));
     }
 
 
@@ -92,6 +94,40 @@ class LeaderboardsPage extends React.Component {
         return options;
     }
 
+    getAllEventsUserTable = (users) => {
+        let rows = [];
+        if (users) {
+            users.forEach(user => rows.push(
+                <tr>
+                    <td>{user.username}</td>
+                    <td>{user.full_name}</td>
+                    <td>{user.city}</td>
+                    <td>{user.province}</td>
+                    <td>{user.age}</td>
+                    <td>{user.sex === 'M' ? "Male" : "Female"}</td>
+                </tr>
+            ))
+        }
+
+        return (
+            <Table bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>City</th>
+                        <th>Province</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </Table>
+        )
+    }
+
     // TODO finalize Search Button Handlers
     render() {
         return (
@@ -141,6 +177,8 @@ class LeaderboardsPage extends React.Component {
                     </Form.Row>
                 </div>
                 {this.renderLeaderboardTable(sampleUserRankings.users)}
+                <h2>Users Who Participated in All Events:</h2>
+                {this.getAllEventsUserTable(this.state.usersInAllEvents)}
             </div>
         )
     }

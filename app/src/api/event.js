@@ -39,7 +39,6 @@ export async function getAllEvents() {
  */
 export async function getFilteredEvents(filters) {
   try {
-    console.log(filters);
     const res = await fetch("/events/filtered", {
       method: 'POST',
       headers: {
@@ -49,7 +48,6 @@ export async function getFilteredEvents(filters) {
       body: JSON.stringify(filters)
     });
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -61,17 +59,12 @@ export async function getEventTeams(eventId) {
   try {
     const res = await fetch(`/teams/${eventId}`);
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
     console.log(error);
   }
 }
-
-//	    private UUID user_id;
-//	    private UUID event_id;
-//	    private int team_number;
 
 export async function joinTeam(eventId, userId, teamNo) {
   try {
@@ -88,7 +81,6 @@ export async function joinTeam(eventId, userId, teamNo) {
       body: JSON.stringify(joinReq)
     });
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -111,7 +103,6 @@ export async function kickOutOfTeam(eventId, userId, teamNo) {
       body: JSON.stringify(kickReq)
     });
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -134,7 +125,6 @@ export async function inviteUserToEvent(eventId, userId, recipientId) {
       body: JSON.stringify(invite)
     });
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -147,7 +137,6 @@ export async function getUsersInvites(userId) {
   try {
     const res = await fetch(`/invites_guest/${userId}`);
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -159,7 +148,6 @@ export async function getUserEvents(userId) {
   try {
     const res = await fetch(`/events/user_id=${userId}`);
     const result = await res.json();
-    console.log(result);
     return result;
   }
   catch (error) {
@@ -169,10 +157,19 @@ export async function getUserEvents(userId) {
 
 export async function getEventsUserJoined(userId) {
   try {
-    console.log("recvd: "+userId);
     const res = await fetch(`/eventsUserJoined/${userId}`);
     const result = await res.json();
-    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getUsersInAllEvents() {
+  try {
+    const res = await fetch("/users/allEvents");
+    const result = await res.json();
     return result;
   }
   catch (error) {

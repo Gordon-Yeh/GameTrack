@@ -33,4 +33,9 @@ public class UserController {
     public SecuredUser login(@RequestBody LoginForm form) {
         return userService.login(form.getUsername(), form.getPassword());
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/users/allEvents")
+    public List<SecuredUser> getUsersWhoAreInAllEvents() {
+        return userService.findUsersWhoParticipatedInAllEvents();
+    }
 }
