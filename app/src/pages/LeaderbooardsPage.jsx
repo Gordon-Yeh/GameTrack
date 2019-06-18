@@ -156,7 +156,6 @@ class LeaderboardsPage extends React.Component {
         )
     }
 
-    // TODO finalize Search Button Handlers
     render() {
         return (
             <div className="main-content">

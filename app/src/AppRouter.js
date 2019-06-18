@@ -6,7 +6,7 @@ import BrowseEventsPage from './pages/BrowseEventsPage';
 import MyEventsPage from './pages/MyEventsPage';
 import LeaderboardsPage from './pages/LeaderbooardsPage';
 import CreateEventPage from './pages/CreateEventPage';
-import InboxPage from "./pages/InboxPage";
+import MessagesPage from "./pages/MessagesPage";
 import InvitesPage from "./pages/InvitesPage"
 import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
@@ -39,7 +39,7 @@ function AppRouter() {
               <Link to="/createEvent/">Create Events</Link>
             </li>
             <li>
-              <Link to="/inbox/">Inbox</Link>
+              <Link to="/Messages/">Messages</Link>
             </li>
             <li>
               <Link to="/invites/">Invites</Link>
@@ -60,7 +60,7 @@ function AppRouter() {
         <Route path="/myEvents" component={MyEventsPage} />
         <Route path="/leaderboards" component={LeaderboardsPage} />
         <Route path="/createEvent/" component={CreateEventPage} />
-        <Route path="/inbox/" component={InboxPage} />
+        <Route path="/Messages/" component={MessagesPage} />
         <Route path="/invites/" component={InvitesPage} />
         <Route path="/Event/" component={EventPage} />
         <Route path="/draftmessage/" component={DraftMessagePage} />

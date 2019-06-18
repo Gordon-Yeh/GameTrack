@@ -12,8 +12,6 @@ import { getAllUsers } from '../api/account'
 import { Redirect } from 'react-router';
 import { getSessionFromCookie } from '../session'
 
-
-import eventSample from '../test-data/events.json'
 import './EventPage.css'
 
 class EventPage extends React.Component {
@@ -46,7 +44,7 @@ class EventPage extends React.Component {
             <Card className="event-info">
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <h3>{event.name} <Button type="button" variant="info" style={{ marginLeft: '10pt' }} disabled={event.host_user_id != this.state.currentUserId} onClick={() => this.onEditClicked()}>Edit</Button></h3>
+                        <h3>{event.name} <Button type="button" variant="info" style={{ marginLeft: '10pt' }} disabled={event.host_user_id !== this.state.currentUserId} onClick={() => this.onEditClicked()}>Edit</Button></h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         <h3>Created by: </h3>{event.creator_username}
@@ -172,7 +170,7 @@ class EventPage extends React.Component {
 
     getAllUsersAsOptions = () => {
         let options = [<option value=''>Select User</option>];
-        this.state.users.filter(u => u.user_id != this.state.currentUserId).forEach(u => options.push(
+        this.state.users.filter(u => u.user_id !== this.state.currentUserId).forEach(u => options.push(
             <option value={u.user_id}>{u.username}</option>
         ));
         return options;
