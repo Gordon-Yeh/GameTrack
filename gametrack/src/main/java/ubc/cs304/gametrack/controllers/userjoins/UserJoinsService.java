@@ -42,15 +42,21 @@ public class UserJoinsService {
         jdbcTemplate.update("UPDATE Team SET curr_size = curr_size - 1 WHERE event_id = ? AND team_number = ?", event_id, team_number);
     }
 
-    List<LeaderboardUser> getLeaderboard() {
+    List<LeaderboardUser> getLeaderboard(String sport) {
 //        return jdbcTemplate.query("SELECT username, full_name, count(event_id) AS no_of_events FROM UserJoins" +
 //                "           GROUP BY username" +
 //                "           ORDER BY no_of_events",
 //                            new BeanPropertyRowMapper<LeaderboardUser>(LeaderboardUser.class));
 
-        return jdbcTemplate.query("SELECT u.username, u.full_name, count(uj.event_id) AS no_of_events FROM User u, UserJoins uj " +
+//        return jdbcTemplate.query("SELECT u.username, u.full_name, count(uj.event_id) AS no_of_events FROM User u, UserJoins uj " +
+//                "WHERE u.user_id = uj.user_id " +
+//                "GROUP BY u.username, u.full_name " +
+//                "ORDER BY count(uj.event_id) DESC",new BeanPropertyRowMapper<LeaderboardUser>(LeaderboardUser.class));
+        return jdbcTemplate.query("SELECT u.username, u.full_name, count(uj.event_id) AS no_of_events FROM User u, UserJoins uj, Event e " +
                 "WHERE u.user_id = uj.user_id " +
+                "AND uj.event_id = e.event_id " +
+                "AND e.sport = '" + sport + "' " +
                 "GROUP BY u.username, u.full_name " +
-                "ORDER BY count(uj.event_id) DESC",new BeanPropertyRowMapper<LeaderboardUser>(LeaderboardUser.class));
+                "ORDER BY count(uj.event_id) DESC, u.username",new BeanPropertyRowMapper<LeaderboardUser>(LeaderboardUser.class));
     }
 }

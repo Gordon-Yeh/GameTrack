@@ -13,9 +13,9 @@ public class UserJoinsController {
     @Autowired
     UserJoinsService userJoinsService;
 
-    @RequestMapping(method=RequestMethod.GET, value="/users/leaderboards")
-    public List<LeaderboardUser> getLeaderboard() {
-        return userJoinsService.getLeaderboard();
+    @RequestMapping(method=RequestMethod.GET, value="/users/leaderboards/{sport}")
+    public List<LeaderboardUser> getLeaderboard(@PathVariable String sport) {
+        return userJoinsService.getLeaderboard(sport);
     }
 	//
 	// @RequestMapping(method= RequestMethod.POST, value="/teams")

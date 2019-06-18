@@ -38,4 +38,5 @@ public class UserController {
     public List<SecuredUser> getUsersWhoAreInAllEvents() {
         return userService.findUsersWhoParticipatedInAllEvents();
     }
+
 }
