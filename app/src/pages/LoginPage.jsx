@@ -47,7 +47,6 @@ class LoginPage extends React.Component {
   render() {
     const {validated, error, loggedIn} = this.state;
 
-    // TODO: should redirect to event page once done
     if (loggedIn === true) return <Redirect to="/browseEvents" />;
 
     return (

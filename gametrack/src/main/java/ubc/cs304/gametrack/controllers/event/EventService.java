@@ -20,13 +20,14 @@ public class EventService {
 			+ "WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id";
 
 	void createEvent(Event event) {
-		// TODO need to create teams too according to supplied no of teams,
-		// should be empty
 		jdbcTemplate.update(
 				"INSERT INTO Event (event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport) VALUES (?,?,?,?,?,?,?,?)",
 				UUID.randomUUID().toString(), event.getName(), event.getTeam_size(), event.isIs_a_tournament(),
 				event.getNumber_of_teams(), event.getHost_user_id(), event.getBooking_id(), event.getSport());
-
+		for(int i=0; i<event.getNumber_of_teams(); i++) {
+			jdbcTemplate.update("INSERT INTO Team (event_id, team_number, name, curr_size, max_size) VALUES (?,?,?,?)", event.getEvent_id().toString(), i+1, "Team "+String.valueOf(i+1), 0, event.getTeam_size());
+		}
+		
 	}
 
 	List<Event> findAllEvents() {
@@ -34,7 +35,6 @@ public class EventService {
 	}
 
 	public Event findEventBy(String event_id) {
-		// TODO should be done in SQL
 		List<Event> events = findAllEvents();
 		return events.stream().filter(e -> e.getEvent_id().toString().equals(event_id)).findFirst().orElse(new Event());
 	}

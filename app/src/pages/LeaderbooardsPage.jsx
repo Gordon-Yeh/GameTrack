@@ -8,8 +8,17 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 import sampleLocationRankings from '../test-data/topLocations.json'
 import sampleUserRankings from '../test-data/userRankings.json'
+import { getSports } from '../api/sports';
+import { getSessionFromCookie } from '../session'
 
 class LeaderboardsPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { sports: [], currentUserId: getSessionFromCookie().user_id };
+        getSports().then(sports => this.setState({ sports: sports }));
+    }
+
 
     renderLocationsTable = (locations) => {
 
@@ -33,7 +42,7 @@ class LeaderboardsPage extends React.Component {
 
     getLocationsRows = (locations) => {
         let rows = [];
-        locations.forEach(loc=> {
+        locations.forEach(loc => {
             rows.push(<tr>
                 <td>{loc.rank}</td>
                 <td>{loc.name}</td>
@@ -74,6 +83,15 @@ class LeaderboardsPage extends React.Component {
         });
         return rows;
     }
+
+    getSportsOptions = () => {
+        let options = [<option value=''>Select Sport</option>];
+        this.state.sports.forEach(s => options.push(
+            <option value={s.name}>{s.name}</option>
+        ));
+        return options;
+    }
+
     // TODO finalize Search Button Handlers
     render() {
         return (
@@ -87,30 +105,24 @@ class LeaderboardsPage extends React.Component {
                 <h2>Top Locations</h2>
                 <div>
                     <Form.Row>
-                        <Form.Group as={Col} md="4">
+                        <Form.Group as={Col} md="3">
                             <Form.Label>Sport</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
-                                    <option value='Soccer'>Soccer</option>
-                                    <option value='American Football'>American Football</option>
-                                    <option value='Basketball'>Basketball</option>
-                                    <option value='Tennis'>Tennis</option>
-                                    <option value='Squash'>Squash</option>
+                                    {this.getSportsOptions()}
                                 </Form.Control>
                             </InputGroup>
                         </Form.Group>
-                        <Form.Group as={Col} md="4">
+                        <Form.Group as={Col} md="3">
                             <Form.Label>Time Period</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
                                     <option value=''>All Time</option>
                                     <option value='week'>Past Week</option>
                                     <option value='month'>Past Month</option>
                                     <option value='year'>Year</option>
                                 </Form.Control>
-                                <Button as="input" type="reset" value="Search" style={{marginLeft: '10pt'}} />
+                                <Button as="input" type="reset" value="Search" style={{ marginLeft: '10pt' }} />
                             </InputGroup>
                         </Form.Group>
                     </Form.Row>
@@ -121,14 +133,9 @@ class LeaderboardsPage extends React.Component {
                             <Form.Label>Sport</Form.Label>
                             <InputGroup>
                                 <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
-                                    <option value='Soccer'>Soccer</option>
-                                    <option value='American Football'>American Football</option>
-                                    <option value='Basketball'>Basketball</option>
-                                    <option value='Tennis'>Tennis</option>
-                                    <option value='Squash'>Squash</option>
+                                    {this.getSportsOptions()}
                                 </Form.Control>
-                                <Button as="input" type="reset" value="Search" style={{marginLeft: '10pt'}} />
+                                <Button as="input" type="reset" value="Search" style={{ marginLeft: '10pt' }} />
                             </InputGroup>
                         </Form.Group>
                     </Form.Row>
