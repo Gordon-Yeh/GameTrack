@@ -5,6 +5,15 @@ import { createEvent } from '../api/event';
 import { getLocations } from '../api/location';
 
 const MAX_ALLOWED_TEAM = 8;
+const CURRENT_YEAR = new Date().getFullYear();
+const CURRENT_MONTH = new Date().getMonth();
+const CURRENT_DATE = new Date().getDate();
+
+const getArrayWithRange = (a, b) => {
+  let arr = [];
+  for (let i = a; i <= b; i++) arr.push(i);
+  return arr;
+}
 
 const eventTypes = {
   CASUAL: 'Casual',
@@ -31,6 +40,13 @@ class CreateEventPage extends React.Component {
       success: false,
 
       eventType: null,
+      startYear: CURRENT_YEAR,
+      startMonth: CURRENT_MONTH,
+      startDate: CURRENT_DATE,
+      startTime: null,
+
+      durationHour: 1,
+        
       sport: null,
       locationId: null,
       teamSize: null,
@@ -45,6 +61,11 @@ class CreateEventPage extends React.Component {
     this.handleLocationIdChange = this.handleLocationIdChange.bind(this);
     this.handleNumberOfTeamsChange = this.handleNumberOfTeamsChange.bind(this);
     this.handleTeamSizeChange = this.handleTeamSizeChange.bind(this);
+    this.handleStartYearChange = this.handleStartYearChange.bind(this);
+    this.handleStartMonthChange = this.handleStartMonthChange.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleStartTimeChange = this.handleStartTimeChange.bind(this);
+    this.handleDurationHourChange = this.handleDurationHourChange.bind(this);
   }
 
   handleSportChange(e) {
@@ -94,19 +115,54 @@ class CreateEventPage extends React.Component {
     }
   }
 
+  handleStartYearChange(e) {
+    const val = e.target.value;
+    this.setState({ startYear: val });
+  }
+
+  handleStartMonthChange(e) {
+    const val = e.target.value;
+    this.setState({ startMonth: val });
+  }
+
+  handleStartDateChange(e) {
+    const val = e.target.value;
+    this.setState({ startDate: val });
+  }
+
+  handleStartTimeChange(e) {
+    const val = e.target.value;
+    this.setState({ startTime: val });
+  }
+
+  handleDurationHourChange(e) {
+    const val = e.target.value;
+    this.setState({ durationHour: val });
+  }
+
   handleSubmit(e) {
     // prevents to page from reloading
+    const { eventType, sport, locationId, teamSize, numberOfTeams, startYear, startMonth, startDate, startTime, durationHour } = this.state;
     e.preventDefault();
     e.stopPropagation();
 
-    const eventInfo = {
-      isATournament: this.state.eventType === 'TOURNAMENT',
-      sport: this.state.sport,
-      locationId: this.state.locationId,
-      teamSize: this.state.teamSize,
-      numberOfTeams: this.state.numberOfTeams
-    }
+    const eventInfo = {};
+    eventInfo.is_a_tournament = (eventType === 'TOURNAMENT');
+    eventInfo.sport = sport;
+    eventInfo.location_id = locationId;
+    eventInfo.team_size = teamSize;
+    eventInfo.number_of_teams = numberOfTeams;
+    
+    let st = new Date(startYear, startMonth, startDate);
+    st.setHours(startTime);
+    console.log(st.toISOString());
+    eventInfo.start_time = st.valueOf();
 
+    const hour_to_ms_mask = 3600000;
+    eventInfo.end_time = eventInfo.start_time + (durationHour * hour_to_ms_mask);
+    console.log(new Date(eventInfo.end_time).toISOString());
+    console.log(eventInfo);
+    
     createEvent(eventInfo)
       .then(() => {
         this.setState({ success: true });
@@ -119,6 +175,7 @@ class CreateEventPage extends React.Component {
   render() {
     const { validated, error, success } = this.state;
     const { eventType, sport, locationId, teamSize, numberOfTeams } = this.state;
+    const { startYear, startMonth, startDate, startTime, durationHour } = this.state;
     const { availableLocations } = this.state;
 
     // TODO: should redirect to event page once done
@@ -239,6 +296,65 @@ class CreateEventPage extends React.Component {
                     </Form.Control>
                   </Form.Group>
                 )}
+
+                <Form.Row>
+                  <Form.Group as={Col} controlId="startYear">
+                    <Form.Label>Year</Form.Label>
+                    <Form.Control as="select" value={startYear} onChange={this.handleStartYearChange} required>
+                      {getArrayWithRange(CURRENT_YEAR, CURRENT_YEAR+3).map((yr) => (
+                        <option key={yr} value={yr}>
+                          {yr}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="startMonth">
+                    <Form.Label>Month</Form.Label>
+                    <Form.Control as="select" value={startMonth} onChange={this.handleStartMonthChange} required>
+                      {getArrayWithRange(1, 12).map((mon) => (
+                        <option key={mon} value={mon-1 /* -1 because js Date's month is 0 based */}>
+                          {mon}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="province">
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control as="select" value={startDate} onChange={this.handleStartDateChange} required>
+                      {getArrayWithRange(1, 31).map((date) => (
+                        <option key={date} value={date}>
+                          {date}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                  <Form.Group as={Col} controlId="startTime">
+                    <Form.Label>Start Time</Form.Label>
+                    <Form.Control as="select" value={startTime} onChange={this.handleStartTimeChange} required>
+                      {getArrayWithRange(8, 20).map((hr) => (
+                        <option key={hr} value={hr}>
+                          {`${hr}:00`}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group as={Col} controlId="startTime">
+                    <Form.Label>Duration (Hours)</Form.Label>
+                    <Form.Control as="select" value={durationHour} onChange={this.handleDurationHourChange} required>
+                      {getArrayWithRange(1, 6).map((hr) => (
+                        <option key={hr} value={hr}>
+                          {hr}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
+                </Form.Row>
 
                 <Button variant="primary" type="submit">
                   Submit
