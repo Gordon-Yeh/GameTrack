@@ -65,4 +65,8 @@ public class UserService {
 				+ " WHERE e.event_id NOT IN( SELECT uj.event_id from UserJoins uj" + " WHERE uj.user_id = u.user_id))";
 		return jdbcTemplate.query(query, new BeanPropertyRowMapper<SecuredUser>(SecuredUser.class));
 	}
+	
+	public int findNumberOfUsers() {
+		return jdbcTemplate.queryForObject("Select Count(*) from User", Integer.class);
+	}
 }

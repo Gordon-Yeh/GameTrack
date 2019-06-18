@@ -2,13 +2,15 @@ package ubc.cs304.gametrack.controllers.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import ubc.cs304.gametrack.entities.Count;
 import ubc.cs304.gametrack.entities.Event;
 
 import java.util.List;
 
 @RestController
 public class EventController {
-
+	
     @Autowired
     EventService eventService;
 
@@ -40,6 +42,13 @@ public class EventController {
     @RequestMapping(method=RequestMethod.GET, value="/eventsUserJoined/{userId}")
     public List<Event> findEventsUserJoined(@PathVariable String userId) {
     	return eventService.getEventsUserIsParticipatingIn(userId);
+    }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/events/count")
+    public Count getEventsCount() {
+    	Count c = new Count();
+    	c.count = eventService.findNumberOfEvents();
+    	return c;
     }
 
 }

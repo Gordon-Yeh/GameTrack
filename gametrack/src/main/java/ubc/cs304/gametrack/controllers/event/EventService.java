@@ -48,6 +48,10 @@ public class EventService {
 	List<Event> filterEvents(Filter filters) {
 		return jdbcTemplate.query(getQueryWithFilters(filters), new BeanPropertyRowMapper<Event>(Event.class));
 	}
+	
+	public int findNumberOfEvents() {
+		return jdbcTemplate.queryForObject("Select Count(*) from Event", Integer.class);
+	}
 
 	List<Event> getEventsUserIsParticipatingIn(String userId) {
 		return jdbcTemplate.query(
@@ -85,4 +89,6 @@ public class EventService {
 		}
 		return selectEventWithJoinQuery;
 	}
+	
+	
 }

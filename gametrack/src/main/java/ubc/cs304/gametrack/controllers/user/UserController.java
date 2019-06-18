@@ -3,6 +3,7 @@ package ubc.cs304.gametrack.controllers.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubc.cs304.gametrack.entities.User;
+import ubc.cs304.gametrack.entities.Count;
 import ubc.cs304.gametrack.entities.LoginForm;
 import ubc.cs304.gametrack.entities.SecuredUser;
 
@@ -37,6 +38,13 @@ public class UserController {
     @RequestMapping(method=RequestMethod.GET, value="/users/allEvents")
     public List<SecuredUser> getUsersWhoAreInAllEvents() {
         return userService.findUsersWhoParticipatedInAllEvents();
+    }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/users/count")
+    public Count getUsersCount() {
+    	Count c = new Count();
+    	c.count = userService.findNumberOfUsers(); 
+    	return c;
     }
 
 }

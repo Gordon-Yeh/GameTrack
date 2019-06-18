@@ -7,7 +7,13 @@ import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
 import { getSports } from '../api/sports';
-import { getUsersInAllEvents, getUsersLeaderboards, getTopLocations } from '../api/leaderboards'
+import {
+    getUsersInAllEvents,
+    getUsersLeaderboards,
+    getTopLocations,
+    getEventsCount,
+    getUsersCount
+} from '../api/leaderboards'
 import { getSessionFromCookie } from '../session'
 
 class LeaderboardsPage extends React.Component {
@@ -20,12 +26,14 @@ class LeaderboardsPage extends React.Component {
             usersInAllEvents: [], topLocations: [],
             userLeaderboards: [],
             userLeaderboardSport: React.createRef(),
-            topLocationsSport: React.createRef()
+            topLocationsSport: React.createRef(),
+            userCount: null,
+            eventCount: null
         };
         getSports().then(sports => this.setState({ sports: sports }));
         getUsersInAllEvents().then(u => this.setState({ usersInAllEvents: u }));
-
-
+        getUsersCount().then(c => this.setState({userCount: c.count}));
+        getEventsCount().then(c => this.setState({eventCount: c.count}));
     }
 
     onUserLeaderboardsSearch = () => {
@@ -66,7 +74,7 @@ class LeaderboardsPage extends React.Component {
         let rows = [];
         locations.forEach((loc, i) => {
             rows.push(<tr>
-                <td>{i+1}</td>
+                <td>{i + 1}</td>
                 <td>{loc.name}</td>
                 <td>{loc.street_address + ' ' + loc.postal_code}</td>
                 <td>{loc.no_of_events}</td>
@@ -97,7 +105,7 @@ class LeaderboardsPage extends React.Component {
         let rows = [];
         users.forEach((user, i) => {
             rows.push(<tr>
-                <td>{i+1}</td>
+                <td>{i + 1}</td>
                 <td>{user.username}</td>
                 <td>{user.full_name}</td>
                 <td>{user.no_of_events}</td>
@@ -158,7 +166,10 @@ class LeaderboardsPage extends React.Component {
                         Find the most active locations and see who the top users are.
                     </p>
                 </Jumbotron>
-                <h2>Top Locations</h2>
+                <h2>Statistics:</h2>
+                <h4>Total number of users: {this.state.userCount}</h4>
+                <h4>Total number of events: {this.state.eventCount}</h4>
+                <h2 style={{ marginTop: '20pt'}}>Top Locations</h2>
                 <div>
                     <Form.Row>
                         <Form.Group as={Col} md="3">

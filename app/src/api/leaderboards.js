@@ -31,3 +31,25 @@ export async function getTopLocations(sport) {
     }
 }
 
+
+export async function getUsersCount() {
+    try {
+        const res = await fetch(`/users/count`);
+        const result = await res.json();
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getEventsCount() {
+    try {
+        const res = await fetch(`/events/count`);
+        const result = await res.json();
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
