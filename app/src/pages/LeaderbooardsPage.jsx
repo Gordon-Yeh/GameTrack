@@ -183,7 +183,7 @@ class LeaderboardsPage extends React.Component {
                         </Form.Group>
                     </Form.Row>
                     {this.renderLocationsTable(this.state.topLocations)}
-                    <h2>Leaderboards</h2>
+                    <h2>Leaderboards (Most Active)</h2>
                     <Form.Row>
                         <Form.Group as={Col} md="4">
                             <Form.Label>Sport</Form.Label>
