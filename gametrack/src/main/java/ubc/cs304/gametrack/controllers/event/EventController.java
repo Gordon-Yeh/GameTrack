@@ -36,5 +36,10 @@ public class EventController {
     public List<Event> findEventsByFilter(@RequestBody Filter filters) {
         return eventService.filterEvents(filters);
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/eventsUserJoined/{userId}")
+    public List<Event> findEventsUserJoined(@PathVariable String userId) {
+    	return eventService.getEventsUserIsParticipatingIn(userId);
+    }
 
 }

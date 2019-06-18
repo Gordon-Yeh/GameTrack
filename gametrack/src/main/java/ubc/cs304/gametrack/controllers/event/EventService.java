@@ -20,7 +20,8 @@ public class EventService {
 			+ "WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id";
 
 	void createEvent(Event event) {
-		// TODO need to create teams too according to supplied no of teams, should be empty
+		// TODO need to create teams too according to supplied no of teams,
+		// should be empty
 		jdbcTemplate.update(
 				"INSERT INTO Event (event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport) VALUES (?,?,?,?,?,?,?,?)",
 				UUID.randomUUID().toString(), event.getName(), event.getTeam_size(), event.isIs_a_tournament(),
@@ -29,8 +30,7 @@ public class EventService {
 	}
 
 	List<Event> findAllEvents() {
-		return jdbcTemplate.query(
-				selectEventWithJoinQuery, new BeanPropertyRowMapper<Event>(Event.class));
+		return jdbcTemplate.query(selectEventWithJoinQuery, new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
 	public Event findEventBy(String event_id) {
@@ -47,6 +47,12 @@ public class EventService {
 
 	List<Event> filterEvents(Filter filters) {
 		return jdbcTemplate.query(getQueryWithFilters(filters), new BeanPropertyRowMapper<Event>(Event.class));
+	}
+
+	List<Event> getEventsUserIsParticipatingIn(String userId) {
+		return jdbcTemplate.query(
+				"SELECT e.* from Event e, UserJoins u WHERE e.event_id = u.event_id AND u.user_id = '" + userId + "'",
+				new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
 	private String getQueryWithFilters(Filter filters) {
@@ -69,7 +75,7 @@ public class EventService {
 
 			if (filters.is_a_tournament != null && filters.is_a_tournament.booleanValue())
 				myQuery.append(" AND is_a_tournament > 0");
-			else if(filters.is_a_tournament != null)
+			else if (filters.is_a_tournament != null)
 				myQuery.append(" AND is_a_tournament = 0");
 
 			if (filters.start_day != 0 && filters.start_month != 0 && filters.start_year != 0)

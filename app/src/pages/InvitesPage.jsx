@@ -2,17 +2,19 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import sampleInvites from '../test-data/invites.json';
 import { getUsersInvites } from "../api/event";
 import { Redirect } from 'react-router';
+import { getSessionFromCookie } from '../session';
 
 class InvitesPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { invites: [], redirectToEvent: false, redirectEvent: null };
-        // TODO figure out how to get current user id 
-        getUsersInvites("af93f012-8ef9-11e9-bc42-526af7764f65"/*"af93f012-8ef9-11e9-bc42-526af7764f64"*/).then(i => this.setState({ invites: i }));
+        let currentUser = getSessionFromCookie();
+        if(currentUser) {
+            getUsersInvites(currentUser.user_id).then(i => this.setState({ invites: i }));
+        }
     }
 
     onViewClicked = (invite) => {

@@ -155,4 +155,29 @@ export async function getUsersInvites(userId) {
   }
 }
 
+export async function getUserEvents(userId) {
+  try {
+    const res = await fetch(`/events/user_id=${userId}`);
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getEventsUserJoined(userId) {
+  try {
+    console.log("recvd: "+userId);
+    const res = await fetch(`/eventsUserJoined/${userId}`);
+    const result = await res.json();
+    console.log(result);
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
 

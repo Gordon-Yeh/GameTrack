@@ -10,6 +10,7 @@ import { getEventTeams, joinTeam, kickOutOfTeam, inviteUserToEvent } from '../ap
 import { getSportInfo } from '../api/sports';
 import { getAllUsers } from '../api/account'
 import { Redirect } from 'react-router';
+import { getSessionFromCookie } from '../session'
 
 
 import eventSample from '../test-data/events.json'
@@ -18,7 +19,7 @@ import './EventPage.css'
 class EventPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { event: this.props.location.state.event, redirectToEdit: false, teams: [], sportInfo: null, users: [], recipient: React.createRef() };
+        this.state = { event: this.props.location.state.event, redirectToEdit: false, teams: [], sportInfo: null, users: [], recipient: React.createRef(), currentUserId: getSessionFromCookie().user_id };
         this.refreshState();
     }
 
@@ -34,8 +35,7 @@ class EventPage extends React.Component {
 
     onInviteClicked = () => {
         if (this.state.recipient.current.value) {
-            // TODO figure out how to get current user id
-            inviteUserToEvent(this.state.event.event_id, "af93f012-8ef9-11e9-bc42-526af7764f64", this.state.recipient.current.value).then(r => alert("Invitation sent!"));
+            inviteUserToEvent(this.state.event.event_id, this.state.currentUserId, this.state.recipient.current.value).then(r => alert("Invitation sent!"));
         } else {
             alert("Please select recipient Username");
         }
@@ -46,8 +46,7 @@ class EventPage extends React.Component {
             <Card className="event-info">
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        {/* TODO get current user_id */}
-                        <h2>{event.name} <Button type="button" variant="info" style={{ marginLeft: '10pt' }} disabled={false} onClick={() => this.onEditClicked()}>Edit</Button></h2>
+                        <h3>{event.name} <Button type="button" variant="info" style={{ marginLeft: '10pt' }} disabled={event.host_user_id != this.state.currentUserId} onClick={() => this.onEditClicked()}>Edit</Button></h3>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         <h3>Created by: </h3>{event.creator_username}
@@ -91,8 +90,7 @@ class EventPage extends React.Component {
     }
 
     onJoinClicked = (team) => {
-        // TODO figure out a way to get current username
-        joinTeam(this.state.event.event_id, "af93f012-8ef9-11e9-bc42-526af7764f64", team.team_number).then(r => this.refreshState());
+        joinTeam(this.state.event.event_id, this.state.currentUserId, team.team_number).then(r => this.refreshState());
     }
 
     onKickClicked = (team, user) => {
@@ -105,7 +103,15 @@ class EventPage extends React.Component {
             teams.forEach(team => {
                 tables.push(
                     <div>
-                        <h4>{team.name}: {team.curr_size}/{team.max_size}<Button type="button" variant="success" style={{ marginLeft: '10pt' }} onClick={() => this.onJoinClicked(team)}>Join</Button></h4>
+                        <h4>{team.name}: {team.curr_size}/{team.max_size}
+                            <Button
+                                type="button"
+                                variant="success"
+                                style={{ marginLeft: '10pt' }}
+                                onClick={() => this.onJoinClicked(team)}
+                                disabled={team.curr_size >= team.max_size}>
+                                    Join
+                                </Button></h4>
                         <Table striped bordered hover className="table">
                             <thead>
                                 <tr>
@@ -132,7 +138,7 @@ class EventPage extends React.Component {
             rows.push(<tr>
                 <td>{i + 1}</td>
                 <td>{member.username}</td>
-                <td><Button type="button" variant="danger" onClick={() => this.onKickClicked(team, member)}>Kick Out!</Button></td>
+                <td><Button type="button" variant="danger" onClick={() => this.onKickClicked(team, member)}>{member.user_id === this.state.currentUserId ? "Leave" : "Kick Out!"}</Button></td>
             </tr>);
         });
         return rows;
@@ -166,8 +172,7 @@ class EventPage extends React.Component {
 
     getAllUsersAsOptions = () => {
         let options = [<option value=''>Select User</option>];
-        // TODO figure out how to get current user id
-        this.state.users.filter(u => u.user_id != "af93f012-8ef9-11e9-bc42-526af7764f64").forEach(u => options.push(
+        this.state.users.filter(u => u.user_id != this.state.currentUserId).forEach(u => options.push(
             <option value={u.user_id}>{u.username}</option>
         ));
         return options;

@@ -9,7 +9,7 @@ let sessionUser = null;
  * get user session from cookie
  * @returns null if no session or session expired
  */
-function getSessionFromCookie() {
+export function getSessionFromCookie() {
   let session = Cookies.getJSON(cookieValue);
   return session ? session : null;
 }
