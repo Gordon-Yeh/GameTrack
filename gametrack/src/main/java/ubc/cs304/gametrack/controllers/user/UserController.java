@@ -16,8 +16,8 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(method=RequestMethod.POST, value="/users")
-    public void registerUser(@RequestBody User user) {
-        userService.createUser(user);
+    public SecuredUser registerUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/users")
