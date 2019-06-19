@@ -24,10 +24,11 @@ public class EventService {
 				"INSERT INTO Event (event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport) VALUES (?,?,?,?,?,?,?,?)",
 				UUID.randomUUID().toString(), event.getName(), event.getTeam_size(), event.isIs_a_tournament(),
 				event.getNumber_of_teams(), event.getHost_user_id(), event.getBooking_id(), event.getSport());
-		for(int i=0; i<event.getNumber_of_teams(); i++) {
-			jdbcTemplate.update("INSERT INTO Team (event_id, team_number, name, curr_size, max_size) VALUES (?,?,?,?)", event.getEvent_id().toString(), i+1, "Team "+String.valueOf(i+1), 0, event.getTeam_size());
+		for (int i = 0; i < event.getNumber_of_teams(); i++) {
+			jdbcTemplate.update("INSERT INTO Team (event_id, team_number, name, curr_size, max_size) VALUES (?,?,?,?)",
+					event.getEvent_id().toString(), i + 1, "Team " + String.valueOf(i + 1), 0, event.getTeam_size());
 		}
-		
+
 	}
 
 	List<Event> findAllEvents() {
@@ -40,22 +41,30 @@ public class EventService {
 	}
 
 	List<Event> findEventsByHost(String user_id) {
-		return jdbcTemplate
-				.query("SELECT event_id,name,team_size,is_a_tournament,number_of_teams,host_user_id,booking_id,sport FROM Event WHERE host_user_id = '"
-						+ user_id + "'", new BeanPropertyRowMapper<Event>(Event.class));
+		String query = "SELECT e.event_id, e.name, e.team_size, e.is_a_tournament, e.number_of_teams, e.host_user_id, e.booking_id, e.sport,"
+				+ " u.username as creator_username, lb.start_time as start_date, lb.end_time as end_date, l.name as location_name "
+				+ " FROM Event e, LocationBooking lb, Location l, User u "
+				+ " WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id AND host_user_id = '"
+				+ user_id + "'";
+		return jdbcTemplate.query(query, new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
 	List<Event> filterEvents(Filter filters) {
 		return jdbcTemplate.query(getQueryWithFilters(filters), new BeanPropertyRowMapper<Event>(Event.class));
 	}
-	
+
 	public int findNumberOfEvents() {
 		return jdbcTemplate.queryForObject("Select Count(*) from Event", Integer.class);
 	}
 
 	List<Event> getEventsUserIsParticipatingIn(String userId) {
+		String query = "SELECT e.event_id, e.name, e.team_size, e.is_a_tournament, e.number_of_teams, e.host_user_id, e.booking_id, e.sport,"
+				+ " u.username as creator_username, lb.start_time as start_date, lb.end_time as end_date, l.name as location_name "
+				+ " FROM Event e, LocationBooking lb, Location l, User u, UserJoins uj"
+				+ " WHERE e.booking_id = lb.booking_id AND lb.location_id = l.location_id AND e.host_user_id = u.user_id AND e.event_id = uj.event_id AND uj.user_id = '"
+				+ userId + "'";
 		return jdbcTemplate.query(
-				"SELECT e.* from Event e, UserJoins u WHERE e.event_id = u.event_id AND u.user_id = '" + userId + "'",
+				query,
 				new BeanPropertyRowMapper<Event>(Event.class));
 	}
 
@@ -89,6 +98,5 @@ public class EventService {
 		}
 		return selectEventWithJoinQuery;
 	}
-	
-	
+
 }

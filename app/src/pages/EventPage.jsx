@@ -40,6 +40,7 @@ class EventPage extends React.Component {
     }
 
     getSideBar = (event) => {
+        console.log(event);
         return (
             <Card className="event-info">
                 <ListGroup variant="flush">

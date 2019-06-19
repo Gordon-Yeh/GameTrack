@@ -10,61 +10,43 @@ import MessagesPage from "./pages/MessagesPage";
 import InvitesPage from "./pages/InvitesPage"
 import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 function AppRouter() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login/">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup/">signup</Link>
-            </li> 
-            <li>
-              <Link to="/browseEvents/">Browse Events</Link>
-            </li>
-            <li>
-              <Link to="/myEvents/">My Events</Link>
-            </li>
-            <li>
-              <Link to="/leaderboards/">Leaderboards</Link>
-            </li>
-            <li>
-              <Link to="/createEvent/">Create Events</Link>
-            </li>
-            <li>
-              <Link to="/Messages/">Messages</Link>
-            </li>
-            <li>
-              <Link to="/invites/">Invites</Link>
-            </li>
-            <li>
-              <Link to="/Event/">Event</Link>
-            </li>
-            <li>
-              <Link to="/draftmessage/">draftmessage</Link>
-            </li>
-          </ul>
-        </nav>
+      <Navbar bg="light" expand="lg" style={{ marginBottom: '50pt' }}>
+        <Navbar.Brand href="#home">GameTracker</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/login/">Login</Nav.Link>
+            <Nav.Link href="/signup/">Sign Up</Nav.Link>
+            <Nav.Link href="/browseEvents/">Browse Events</Nav.Link>
+            <Nav.Link href="/myEvents/">My Events</Nav.Link>
+            <Nav.Link href="/leaderboards/">Leaderboards</Nav.Link>
+            <Nav.Link href="/createEvent/">Create Event</Nav.Link>
+            <Nav.Link href="/invites/">Invites</Nav.Link>
+            <Nav.Link href="/Messages/">Messages</Nav.Link>
+            <Nav.Link href="/draftmessage/">Send Message</Nav.Link>
 
-        <Route path="/" exact component={LoginPage} />
-        <Route path="/login/" component={LoginPage} />
-        <Route path="/signup/" component={SignupPage} />
-        <Route path="/browseEvents" component={BrowseEventsPage} />
-        <Route path="/myEvents" component={MyEventsPage} />
-        <Route path="/leaderboards" component={LeaderboardsPage} />
-        <Route path="/createEvent/" component={CreateEventPage} />
-        <Route path="/Messages/" component={MessagesPage} />
-        <Route path="/invites/" component={InvitesPage} />
-        <Route path="/Event/" component={EventPage} />
-        <Route path="/draftmessage/" component={DraftMessagePage} />
-      </div>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Route path="/" exact component={LoginPage} />
+      <Route path="/login/" component={LoginPage} />
+      <Route path="/signup/" component={SignupPage} />
+      <Route path="/browseEvents" component={BrowseEventsPage} />
+      <Route path="/myEvents" component={MyEventsPage} />
+      <Route path="/leaderboards" component={LeaderboardsPage} />
+      <Route path="/createEvent/" component={CreateEventPage} />
+      <Route path="/Messages/" component={MessagesPage} />
+      <Route path="/invites/" component={InvitesPage} />
+      <Route path="/Event/" component={EventPage} />
+      <Route path="/draftmessage/" component={DraftMessagePage} />
     </Router>
   );
 }
