@@ -15,7 +15,7 @@ public class UserJoinsService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    void joinTeam(UserJoins userjoins) {
+    public void joinTeam(UserJoins userjoins) {
         jdbcTemplate.update("INSERT INTO UserJoins (user_id,event_id,team_number) VALUES (?,?,?)",
                 userjoins.getUser_id().toString(),
                 userjoins.getEvent_id().toString(),

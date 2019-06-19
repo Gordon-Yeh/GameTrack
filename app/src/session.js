@@ -35,3 +35,10 @@ export function storeSession(user) {
   Cookies.set(cookieValue, user); // TODO: add expiration , { expires: sessionLifeInDays });
   sessionUser = user;
 }
+
+/**
+ * @returns the user id of the user in session 
+ */
+export function getSessionUserId() {
+  return hasSession() ? sessionUser.user_id : null; 
+}

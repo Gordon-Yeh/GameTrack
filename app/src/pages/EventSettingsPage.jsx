@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { createEvent } from '../api/event';
 import { getLocations } from '../api/location';
+import { getSessionUserId } from '../session';
 
 const MAX_ALLOWED_TEAM = 8;
 const CURRENT_YEAR = new Date().getFullYear();
@@ -36,35 +37,52 @@ class CreateEventPage extends React.Component {
     super(props);
 
     const isEditing = Boolean(this.props.isEditing);
-    const event = props.location.state.event;
+    const presetState = props.location.state;
+    let event = null;
+    if (isEditing && presetState) {
+      event = {
+        eventId: presetState.event.event_id,
+        eventName: presetState.event.name,
+        eventType: (presetState.event.is_a_tournament ? 'Tournament' : 'Casual'),
+        startYear: new Date(presetState.event.start_date).getFullYear(),
+        startMonth: new Date(presetState.event.start_date).getMonth(),
+        startDate: new Date(presetState.event.start_date).getDate(),
+        startTime: new Date(presetState.event.start_date).getHours(),
+        durationHour: 1,
+        sport: presetState.event.sport,
+        locationId: presetState.event.location_id,
+        teamSize: presetState.event.team_size,
+        numberOfTeams: presetState.event.number_of_teams,
+      };
+    } else {
+      event = {
+        eventId: null,
+        eventName: null,
+        eventType: null,
+        startYear: CURRENT_YEAR,
+        startMonth: CURRENT_MONTH,
+        startDate: CURRENT_DATE,
+        startTime: 8,
+        durationHour: 1,
+        sport: null,
+        locationId: null,
+        teamSize: null,
+        numberOfTeams: 2,
+      };
+    };
 
-    this.state = {};
     this.state = {
       isEditing,
-      eventId: isEditing ? event.event_id : null,
-
+      ...event,
       validated: false,
       error: null,
       success: false,
-
-      eventType: isEditing ? (event.is_a_tournament ? 'Tournament' : 'Casual') : null,
-      startYear: isEditing ? new Date(event.start_time).getFullYear() : CURRENT_YEAR,
-      startMonth: isEditing ? new Date(event.start_time).getMonth() : CURRENT_MONTH,
-      startDate: isEditing ? new Date(event.start_time).getDate() : CURRENT_DATE,
-      startTime: isEditing ? new Date(event.start_time).getHours() : 8,
-
-      durationHour: 1,
-        
-      sport: isEditing ? event.sport : null,
-      locationId: isEditing ? event.location_id : null,
-      teamSize: isEditing ? event.team_size : null,
-      numberOfTeams: isEditing ? event.number_of_teams : 2,
-
       availableLocations: null
     };
     // This binding is necessary to make `this` work in the callback
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEventTypeChange = this.handleEventTypeChange.bind(this);
+    this.handleEventNameChange = this.handleEventNameChange.bind(this);
     this.handleSportChange = this.handleSportChange.bind(this);
     this.handleLocationIdChange = this.handleLocationIdChange.bind(this);
     this.handleNumberOfTeamsChange = this.handleNumberOfTeamsChange.bind(this);
@@ -100,6 +118,12 @@ class CreateEventPage extends React.Component {
         eventType: val 
       });
     }
+  }
+
+  handleEventNameChange(e) {
+    const val = e.target.value;
+    console.log('handleEventNameChange', val);
+    this.setState({ eventName: val });
   }
 
   handleLocationIdChange(e) {
@@ -150,16 +174,18 @@ class CreateEventPage extends React.Component {
 
   handleSubmit(e) {
     // prevents to page from reloading
-    const { eventType, sport, locationId, teamSize, numberOfTeams, startYear, startMonth, startDate, startTime, durationHour } = this.state;
+    const { eventType, eventName, sport, locationId, teamSize, numberOfTeams, startYear, startMonth, startDate, startTime, durationHour } = this.state;
     e.preventDefault();
     e.stopPropagation();
 
     const eventInfo = {};
     eventInfo.is_a_tournament = (eventType === 'TOURNAMENT');
+    eventInfo.name = eventName;
     eventInfo.sport = sport;
     eventInfo.location_id = locationId;
     eventInfo.team_size = teamSize;
     eventInfo.number_of_teams = numberOfTeams;
+    eventInfo.host_user_id = getSessionUserId();
     
     let st = new Date(startYear, startMonth, startDate);
     st.setHours(startTime);
@@ -182,7 +208,7 @@ class CreateEventPage extends React.Component {
 
   render() {
     const { isEditing, validated, error, success } = this.state;
-    const { eventType, sport, locationId, teamSize, numberOfTeams } = this.state;
+    const { eventType, eventName, sport, locationId, teamSize, numberOfTeams } = this.state;
     const { startYear, startMonth, startDate, startTime, durationHour } = this.state;
     const { availableLocations } = this.state;
 
@@ -251,6 +277,16 @@ class CreateEventPage extends React.Component {
                     </Form.Control>
                   </Form.Group>
                 )}
+
+                <Form.Group controlId="eventName">
+                    <Form.Label>Event Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={this.handleEventNameChange}
+                      value={eventName ? eventName : ''}
+                      required
+                    />
+                </Form.Group>
 
                 <Form.Group controlId="teamSize">
                     <Form.Label>Team Size</Form.Label>

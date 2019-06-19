@@ -27,11 +27,10 @@ function AppRouter() {
             <Nav.Link href="/browseEvents/">Browse Events</Nav.Link>
             <Nav.Link href="/myEvents/">My Events</Nav.Link>
             <Nav.Link href="/leaderboards/">Leaderboards</Nav.Link>
-            <Nav.Link href="/createEvent/">Create Event</Nav.Link>
+            <Nav.Link href="/event/create">Create Event</Nav.Link>
             <Nav.Link href="/invites/">Invites</Nav.Link>
             <Nav.Link href="/Messages/">Messages</Nav.Link>
             <Nav.Link href="/draftmessage/">Send Message</Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -42,13 +41,13 @@ function AppRouter() {
       <Route path="/browseEvents" component={BrowseEventsPage} />
       <Route path="/myEvents" component={MyEventsPage} />
       <Route path="/leaderboards" component={LeaderboardsPage} />
+      <Route path="/Messages/" component={MessagesPage} />
+      <Route path="/draftmessage/" component={DraftMessagePage} />
+      <Route path="/invites/" component={InvitesPage} />
+      <Route path="/event/" exact component={EventPage} />
       <Route path="/event/create" component={EventSettingsPage} />
       {/* reference: https://tylermcginnis.com/react-router-pass-props-to-components/ */}
       <Route path="/event/edit" render={(props) => <EventSettingsPage {...props} isEditing/>} />
-      <Route path="/Messages/" component={MessagesPage} />
-      <Route path="/invites/" component={InvitesPage} />
-      <Route path="/Event/" component={EventPage} />
-      <Route path="/draftmessage/" component={DraftMessagePage} />
     </Router>
   );
 }

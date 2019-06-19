@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ubc.cs304.gametrack.entities.Count;
 import ubc.cs304.gametrack.entities.Event;
+import ubc.cs304.gametrack.entities.EventForm;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class EventController {
     EventService eventService;
 
     @RequestMapping(method= RequestMethod.POST, value="/events")
-    public void createEvent(@RequestBody Event event) {
-        eventService.createEvent(event);
+    public void createEvent(@RequestBody EventForm form) {
+        eventService.createEvent(form);
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/events")
