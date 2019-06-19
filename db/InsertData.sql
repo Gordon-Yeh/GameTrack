@@ -1,6 +1,8 @@
 
 
 -- Users af93f012-8ef9-11e9-bc42-526af7764f64
+INSERT INTO User VALUES ('2563eb25-b7ac-40d7-a28f-810694046382', 'admin', 'Bob Rosh', 'admin', 23, 'M', 'Surrey', 'BC');
+
 INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'dario8235', 'Dario Lowery', '18138372fad4b94533cd4881f03dc6c69296dd897234e0cee83f727e2e6b1f63', 23, 'M', 'Surrey', 'BC');
 
 INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-436af7764f64', 'colm_carney2', 'Colm Carney', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 30, 'F', 'Vancouver', 'BC');
