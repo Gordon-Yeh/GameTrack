@@ -9,7 +9,7 @@ import EventTable from './EventTable'
 import { getLocationsFromServer } from '../api/location';
 import { getSports } from '../api/sports';
 import { getAllEvents, getFilteredEvents } from '../api/event';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 import './BrowseEventsPage.css'
 

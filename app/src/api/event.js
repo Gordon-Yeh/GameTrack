@@ -2,20 +2,53 @@
  * Attempts to create a new event
  * @param {Object} eventInfo
  */
-export async function createEvent(eventInfo) {
-  try {
-    const res = await fetch("/events", {
+export function createEvent(eventInfo) {
+  return new Promise((resolve, reject) => {
+    fetch('/events', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(eventInfo)
-    });
-  }
-  catch (error) {
-    console.log(error);
-  }
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        resolve();
+      } else {
+        reject(res.statusText);
+      }
+    })
+  });
+}
+
+/**
+ * Attempts to update an existing event
+ * @param {Object} eventInfo
+ */
+export function editEvent(eventId, eventInfo) {
+  return new Promise((resolve, reject) => {
+    const body = {
+      ...eventInfo,
+      event_id: eventId,
+    };
+
+    fetch('/events', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        resolve();
+      } else {
+        reject(res.statusText);
+      }
+    })
+  });
 }
 
 
