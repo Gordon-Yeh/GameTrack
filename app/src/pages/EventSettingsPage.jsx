@@ -22,13 +22,6 @@ const eventTypes = {
   TOURNAMENT: 'Tournament'
 };
 
-const sportsList = {
-  SOCCER: 'Soccer',
-  BASKETBALL: 'Basketball',
-  TENNIS: 'Tennis',
-  FOOTBALL: 'Football'
-};
-
 const errorMessages = {
   'USERNAME_ALREADY_EXIST': 'Wrong combination of username and password'
 };
@@ -40,18 +33,20 @@ class CreateEventPage extends React.Component {
     const isEditing = Boolean(this.props.isEditing);
     const presetState = props.location.state;
     let event = null;
+
     if (isEditing && presetState) {
       event = {
         eventId: presetState.event.event_id,
         eventName: presetState.event.name,
-        eventType: (presetState.event.is_a_tournament ? 'Tournament' : 'Casual'),
+        eventType: presetState.event.is_a_tournament ? 'TOURNAMENT' : 'CASUAL',
         startYear: new Date(presetState.event.start_date).getFullYear(),
         startMonth: new Date(presetState.event.start_date).getMonth(),
         startDate: new Date(presetState.event.start_date).getDate(),
         startTime: new Date(presetState.event.start_date).getHours(),
         durationHour: 1,
         sport: presetState.event.sport,
-        locationId: presetState.event.location_id,
+        locationName: presetState.event.location_name,
+        locationId: null,
         teamSize: presetState.event.team_size,
         numberOfTeams: presetState.event.number_of_teams,
       };
@@ -71,6 +66,8 @@ class CreateEventPage extends React.Component {
         numberOfTeams: 2,
       };
     };
+
+    console.log(event);
 
     this.state = {
       isEditing,
@@ -98,28 +95,23 @@ class CreateEventPage extends React.Component {
 
   componentDidMount() {
     getSports()
-      .then(data => this.setState({ availableSports: data }))
+      .then(sportData => this.setState({ availableSports: sportData }))
+      .then(() => getLocationsFromServer())
+      .then(locData => this.setState({ availableLocations: locData }))
+      .then(() => {
+        if (this.state.isEditing) {
+          let presetLocationName = this.state.locationName;
+          let presetLocationId = this.state.availableLocations.filter(loc => loc.name === presetLocationName)[0].location_id;
+          this.setState({ locationId: presetLocationId })
+        }
+      })
       .catch(err => this.setState({ error: err }));
   }
 
   handleSportChange(e) {
     const val = e.target.value;
     if (val) {
-      getLocationsFromServer(val)
-        .then((locationList) => {
-          this.setState({
-            sport: val,
-            locationId: null,
-            availableLocations: locationList
-          });      
-        })
-        .catch((err) => {
-          this.setState({
-            error: err,
-            sport: val,
-            locationId: null
-          })
-        })
+      this.setState({ sport: val });
     }
   }
 
@@ -326,6 +318,7 @@ class CreateEventPage extends React.Component {
                     as="select"
                     onChange={this.handleSportChange}
                     value={sport ? sport : ''}
+                    disabled={isEditing}
                     required
                   >
                     <option value="">-</option>
@@ -337,29 +330,28 @@ class CreateEventPage extends React.Component {
                   </Form.Control>
                 </Form.Group>
 
-                {availableLocations && (
-                  <Form.Group controlId="location">
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control 
-                      as="select"
-                      onChange={this.handleLocationIdChange}
-                      value={locationId ? locationId : ''}
-                      required
-                    >
-                      <option value="">-</option>
-                      {availableLocations.map((loc) => (
-                        <option key={loc.location_id} value={loc.location_id}>
-                          {loc.name}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Form.Group>
-                )}
+                <Form.Group controlId="location">
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control 
+                    as="select"
+                    onChange={this.handleLocationIdChange}
+                    value={locationId ? locationId : ''}
+                    disabled={isEditing}
+                    required
+                  >
+                    <option value="">-</option>
+                    {availableLocations.map((loc) => (
+                      <option key={loc.location_id} value={loc.location_id}>
+                        {loc.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
 
                 <Form.Row>
                   <Form.Group as={Col} controlId="startYear">
                     <Form.Label>Year</Form.Label>
-                    <Form.Control as="select" value={startYear} onChange={this.handleStartYearChange} required>
+                    <Form.Control as="select" value={startYear} onChange={this.handleStartYearChange} disabled={isEditing} required>
                       {getArrayWithRange(CURRENT_YEAR, CURRENT_YEAR+3).map((yr) => (
                         <option key={yr} value={yr}>
                           {yr}
@@ -370,7 +362,7 @@ class CreateEventPage extends React.Component {
 
                   <Form.Group as={Col} controlId="startMonth">
                     <Form.Label>Month</Form.Label>
-                    <Form.Control as="select" value={startMonth} onChange={this.handleStartMonthChange} required>
+                    <Form.Control as="select" value={startMonth} onChange={this.handleStartMonthChange} disabled={isEditing} required>
                       {getArrayWithRange(1, 12).map((mon) => (
                         <option key={mon} value={mon-1 /* -1 because js Date's month is 0 based */}>
                           {mon}
@@ -381,7 +373,7 @@ class CreateEventPage extends React.Component {
 
                   <Form.Group as={Col} controlId="province">
                     <Form.Label>Date</Form.Label>
-                    <Form.Control as="select" value={startDate} onChange={this.handleStartDateChange} required>
+                    <Form.Control as="select" value={startDate} onChange={this.handleStartDateChange} disabled={isEditing} required>
                       {getArrayWithRange(1, 31).map((date) => (
                         <option key={date} value={date}>
                           {date}
@@ -394,7 +386,7 @@ class CreateEventPage extends React.Component {
                 <Form.Row>
                   <Form.Group as={Col} controlId="startTime">
                     <Form.Label>Start Time</Form.Label>
-                    <Form.Control as="select" value={startTime} onChange={this.handleStartTimeChange} required>
+                    <Form.Control as="select" value={startTime} onChange={this.handleStartTimeChange} disabled={isEditing} required>
                       {getArrayWithRange(8, 20).map((hr) => (
                         <option key={hr} value={hr}>
                           {`${hr}:00`}
@@ -405,7 +397,7 @@ class CreateEventPage extends React.Component {
 
                   <Form.Group as={Col} controlId="startTime">
                     <Form.Label>Duration (Hours)</Form.Label>
-                    <Form.Control as="select" value={durationHour} onChange={this.handleDurationHourChange} required>
+                    <Form.Control as="select" value={durationHour} onChange={this.handleDurationHourChange} disabled={isEditing} required>
                       {getArrayWithRange(1, 6).map((hr) => (
                         <option key={hr} value={hr}>
                           {hr}
