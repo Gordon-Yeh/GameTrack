@@ -51,7 +51,7 @@ INSERT INTO Message VALUES ('9cc465ce-8efa-11e9-bc42-526af7764f68', 'af93f012-8e
 INSERT INTO SportInfo VALUES (
     'The game of tennis.',
     'number_of_rounds: 3, expected_game_duration: 180',
-   	'Nothing more.');
+    'Nothing more.');
 
 INSERT INTO SportInfo VALUES (
     'The game of soccer.',
@@ -62,19 +62,19 @@ INSERT INTO SportInfo VALUES (
 INSERT INTO SportInfo VALUES (
     'The game of basketball.', 
     'number_of_rounds: 2, expected_game_duration: 150',
-   	'Nothing more.'
+    'Nothing more.'
 );
 
 INSERT INTO SportInfo VALUES (
     'The game of hockey.',
     'number_of_rounds: 3, expected_game_duration: 150',
-   	'Nothing more.'
+    'Nothing more.'
 );
 
 INSERT INTO SportInfo VALUES (
     'The game of baseball.',
     'number_of_rounds: 9, expected_game_duration: 210',
-   	'Nothing more.'
+    'Nothing more.'
 );
 
 -- SportDescription
@@ -177,13 +177,13 @@ INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f65',
 'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
 
 INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f66',
-'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 2)
 
 INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f67',
 'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
 
 INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64',
-'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 2)
 
 INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f68',
-'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 3)

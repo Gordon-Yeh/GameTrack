@@ -2,6 +2,7 @@ package ubc.cs304.gametrack.controllers.location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ubc.cs304.gametrack.entities.LeaderboardLocation;
 import ubc.cs304.gametrack.entities.Location;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public class LocationController {
         return locationService.findLocationBy(location_id);
     }
 
+    @RequestMapping(method=RequestMethod.GET, value="locations/leaderboards/{sport}")
+    public List<LeaderboardLocation> getLocationLeaderboards(@PathVariable String sport) {
+        return locationService.getLeaderboards(sport);
+    }
 }

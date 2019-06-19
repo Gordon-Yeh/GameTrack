@@ -28,8 +28,8 @@ public class InviteController {
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/invites_guest/{guest_id}")
-    public Invite getInviteByGuest(@PathVariable String guest_id) {
-        return inviteService.findInviteByGuest(guest_id);
+    public List<Invite> getInviteByGuest(@PathVariable String guest_id) {
+        return inviteService.findInvitesByGuest(guest_id);
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/invites_event/{event_id}")

@@ -57,7 +57,7 @@ class SignupPage extends React.Component {
     // form values are access via controlId
     // TODO: figure out a cleaner way to get form values
     let userInfo = {};
-    userInfo.fullName = form.elements.fullName.value;
+    userInfo.full_name = form.elements.fullName.value;
     userInfo.age = form.elements.age.value;
     userInfo.sex = form.elements.sex.value;
     userInfo.city = form.elements.city.value;
@@ -78,8 +78,7 @@ class SignupPage extends React.Component {
   render() {
     const {validated, error, loggedIn} = this.state;
 
-    // TODO: should redirect to event page once done
-    if (loggedIn === true) return <Redirect to="/home" />;
+    if (loggedIn === true) return <Redirect to="/browseEvents" />;
 
     return (
       <div

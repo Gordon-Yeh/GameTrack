@@ -47,8 +47,7 @@ class LoginPage extends React.Component {
   render() {
     const {validated, error, loggedIn} = this.state;
 
-    // TODO: should redirect to event page once done
-    if (loggedIn === true) return <Redirect to="/home" />;
+    if (loggedIn === true) return <Redirect to="/browseEvents" />;
 
     return (
       <div
@@ -69,7 +68,7 @@ class LoginPage extends React.Component {
             
               {error && (
                 <Alert variant="danger">
-                  {errorMessages[error]}
+                  {Object.keys(errorMessages).indexOf(error) > -1 ? errorMessages[error] : error}
                 </Alert>
               )}
               <Form 

@@ -15,13 +15,13 @@ public class LocationBookingService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    void createLocationBooking(LocationBooking locationBooking) {
+    public void createLocationBooking(LocationBooking locationBooking) {
 
         jdbcTemplate.update("INSERT INTO LocationBooking (booking_id,start_time,end_time,location_id) VALUES (?,?,?,?) ",
-                UUID.randomUUID().toString(),
+                locationBooking.getBooking_id().toString(),
                 locationBooking.getStart_time(),
                 locationBooking.getEnd_time(),
-                locationBooking.getLocation_id() );
+                locationBooking.getLocation_id().toString());
     }
 
     List<LocationBooking> findAllLocationBookings() {

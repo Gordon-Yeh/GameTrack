@@ -1,6 +1,5 @@
 package ubc.cs304.gametrack.entities;
 
-import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Message {
@@ -8,12 +7,14 @@ public class Message {
     private UUID sender_user_id;
     private UUID receiver_user_id;
     private String content;
-    private Timestamp message_timestamp;
+    private long message_timestamp;
+    private String sender_username;
+    private String receiver_username;
 
     public Message() {
     }
 
-    public Message(UUID message_id, UUID sender_user_id, UUID receiver_user_id, String content, Timestamp message_timestamp) {
+    public Message(UUID message_id, UUID sender_user_id, UUID receiver_user_id, String content, long message_timestamp) {
         this.message_id = message_id;
         this.sender_user_id = sender_user_id;
         this.receiver_user_id = receiver_user_id;
@@ -53,11 +54,27 @@ public class Message {
         this.content = content;
     }
 
-    public Timestamp getMessage_timestamp() {
+    public long getMessage_timestamp() {
         return message_timestamp;
     }
 
-    public void setMessage_timestamp(Timestamp message_timestamp) {
+    public void setMessage_timestamp(long message_timestamp) {
         this.message_timestamp = message_timestamp;
     }
+
+	public String getSender_username() {
+		return sender_username;
+	}
+
+	public void setSender_username(String sender_username) {
+		this.sender_username = sender_username;
+	}
+
+	public String getReceiver_username() {
+		return receiver_username;
+	}
+
+	public void setReceiver_username(String receiver_username) {
+		this.receiver_username = receiver_username;
+	}
 }

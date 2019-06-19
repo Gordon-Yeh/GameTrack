@@ -6,10 +6,49 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
-import sampleLocationRankings from '../test-data/topLocations.json'
-import sampleUserRankings from '../test-data/userRankings.json'
+import { getSports } from '../api/sports';
+import {
+    getUsersInAllEvents,
+    getUsersLeaderboards,
+    getTopLocations,
+    getEventsCount,
+    getUsersCount
+} from '../api/leaderboards'
+import { getSessionFromCookie } from '../session'
 
 class LeaderboardsPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            sports: [],
+            currentUserId: getSessionFromCookie().user_id,
+            usersInAllEvents: [], topLocations: [],
+            userLeaderboards: [],
+            userLeaderboardSport: React.createRef(),
+            topLocationsSport: React.createRef(),
+            userCount: null,
+            eventCount: null
+        };
+        getSports().then(sports => this.setState({ sports: sports }));
+        getUsersInAllEvents().then(u => this.setState({ usersInAllEvents: u }));
+        getUsersCount().then(c => this.setState({userCount: c.count}));
+        getEventsCount().then(c => this.setState({eventCount: c.count}));
+    }
+
+    onUserLeaderboardsSearch = () => {
+        let sport = this.state.userLeaderboardSport.current.value;
+        if (sport) {
+            getUsersLeaderboards(sport).then(users => this.setState({ userLeaderboards: users }));
+        }
+    }
+
+    onTopLocationsSearch = () => {
+        let sport = this.state.topLocationsSport.current.value;
+        if (sport) {
+            getTopLocations(sport).then(locs => this.setState({ topLocations: locs }));
+        }
+    }
 
     renderLocationsTable = (locations) => {
 
@@ -33,12 +72,12 @@ class LeaderboardsPage extends React.Component {
 
     getLocationsRows = (locations) => {
         let rows = [];
-        locations.forEach(loc=> {
+        locations.forEach((loc, i) => {
             rows.push(<tr>
-                <td>{loc.rank}</td>
+                <td>{i + 1}</td>
                 <td>{loc.name}</td>
-                <td>{loc.address + ' ' + loc.postalCode}</td>
-                <td>{loc.noOfEvents}</td>
+                <td>{loc.street_address + ' ' + loc.postal_code}</td>
+                <td>{loc.no_of_events}</td>
             </tr>);
         });
         return rows;
@@ -64,17 +103,59 @@ class LeaderboardsPage extends React.Component {
 
     getUserRows = (users) => {
         let rows = [];
-        users.forEach(user => {
+        users.forEach((user, i) => {
             rows.push(<tr>
-                <td>{user.rank}</td>
+                <td>{i + 1}</td>
                 <td>{user.username}</td>
-                <td>{user.fullName}</td>
-                <td>{user.noOfEvents}</td>
+                <td>{user.full_name}</td>
+                <td>{user.no_of_events}</td>
             </tr>);
         });
         return rows;
     }
-    // TODO finalize Search Button Handlers
+
+    getSportsOptions = () => {
+        let options = [<option value=''>Select Sport</option>];
+        this.state.sports.forEach(s => options.push(
+            <option value={s.name}>{s.name}</option>
+        ));
+        return options;
+    }
+
+    getAllEventsUserTable = (users) => {
+        let rows = [];
+        if (users) {
+            users.forEach(user => rows.push(
+                <tr>
+                    <td>{user.username}</td>
+                    <td>{user.full_name}</td>
+                    <td>{user.city}</td>
+                    <td>{user.province}</td>
+                    <td>{user.age}</td>
+                    <td>{user.sex === 'M' ? "Male" : "Female"}</td>
+                </tr>
+            ))
+        }
+
+        return (
+            <Table bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>City</th>
+                        <th>Province</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </Table>
+        )
+    }
+
     render() {
         return (
             <div className="main-content">
@@ -84,56 +165,39 @@ class LeaderboardsPage extends React.Component {
                         Find the most active locations and see who the top users are.
                     </p>
                 </Jumbotron>
-                <h2>Top Locations</h2>
+                <h2>Statistics:</h2>
+                <h4>Total number of users: {this.state.userCount}</h4>
+                <h4>Total number of events: {this.state.eventCount}</h4>
+                <h2 style={{ marginTop: '20pt'}}>Top Locations</h2>
                 <div>
                     <Form.Row>
-                        <Form.Group as={Col} md="4">
+                        <Form.Group as={Col} md="3">
                             <Form.Label>Sport</Form.Label>
                             <InputGroup>
-                                <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
-                                    <option value='Soccer'>Soccer</option>
-                                    <option value='American Football'>American Football</option>
-                                    <option value='Basketball'>Basketball</option>
-                                    <option value='Tennis'>Tennis</option>
-                                    <option value='Squash'>Squash</option>
+                                <Form.Control as="select" ref={this.state.topLocationsSport}>
+                                    {this.getSportsOptions()}
                                 </Form.Control>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group as={Col} md="4">
-                            <Form.Label>Time Period</Form.Label>
-                            <InputGroup>
-                                <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
-                                    <option value=''>All Time</option>
-                                    <option value='week'>Past Week</option>
-                                    <option value='month'>Past Month</option>
-                                    <option value='year'>Year</option>
-                                </Form.Control>
-                                <Button as="input" type="reset" value="Search" style={{marginLeft: '10pt'}} />
+                                <Button as="input" type="submit" value="Search" style={{ marginLeft: '10pt' }} onClick={() => this.onTopLocationsSearch()} />
                             </InputGroup>
                         </Form.Group>
                     </Form.Row>
-                    {this.renderLocationsTable(sampleLocationRankings.locations)}
-                    <h2>Leaderboards</h2>
+                    {this.renderLocationsTable(this.state.topLocations)}
+                    <h2>Leaderboards (Most Active)</h2>
                     <Form.Row>
                         <Form.Group as={Col} md="4">
                             <Form.Label>Sport</Form.Label>
                             <InputGroup>
-                                <Form.Control as="select">
-                                    {/* TODO finalize sports list */}
-                                    <option value='Soccer'>Soccer</option>
-                                    <option value='American Football'>American Football</option>
-                                    <option value='Basketball'>Basketball</option>
-                                    <option value='Tennis'>Tennis</option>
-                                    <option value='Squash'>Squash</option>
+                                <Form.Control as="select" ref={this.state.userLeaderboardSport}>
+                                    {this.getSportsOptions()}
                                 </Form.Control>
-                                <Button as="input" type="reset" value="Search" style={{marginLeft: '10pt'}} />
+                                <Button as="input" type="submit" value="Search" style={{ marginLeft: '10pt' }} onClick={() => this.onUserLeaderboardsSearch()} />
                             </InputGroup>
                         </Form.Group>
                     </Form.Row>
                 </div>
-                {this.renderLeaderboardTable(sampleUserRankings.users)}
+                {this.renderLeaderboardTable(this.state.userLeaderboards)}
+                <h2>Users Who Participated in All Events:</h2>
+                {this.getAllEventsUserTable(this.state.usersInAllEvents)}
             </div>
         )
     }
