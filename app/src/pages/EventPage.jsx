@@ -109,7 +109,7 @@ class EventPage extends React.Component {
                                 style={{ marginLeft: '10pt' }}
                                 onClick={() => this.onJoinClicked(team)}
                                 disabled={team.curr_size >= team.max_size}>
-                                    Join
+                                Join
                                 </Button></h4>
                         <Table striped bordered hover className="table">
                             <thead>
@@ -137,7 +137,13 @@ class EventPage extends React.Component {
             rows.push(<tr>
                 <td>{i + 1}</td>
                 <td>{member.username}</td>
-                <td><Button type="button" variant="danger" onClick={() => this.onKickClicked(team, member)}>{member.user_id === this.state.currentUserId ? "Leave" : "Kick Out!"}</Button></td>
+                <td><Button
+                    type="button"
+                    variant="danger"
+                    onClick={() => this.onKickClicked(team, member)}
+                    disabled={member.user_id !== this.state.currentUserId && this.state.event.host_user_id !== this.state.currentUserId}>
+                    {member.user_id === this.state.currentUserId ? "Leave" : "Kick Out!"}
+                </Button></td>
             </tr>);
         });
         return rows;
