@@ -2,15 +2,16 @@
  * get available sports 
  */
 export async function getSports() {
-
-    try {
-        const res = await fetch("/sports");
-        const result = await res.json();
-        return result;
-    }
-    catch (error) {
-        console.log(error);
-    }
+    return new Promise((resolve, reject) => {
+        fetch('/sports')
+            .then((res) => {
+                if (res.status === 200) {
+                    res.json().then(resolve);
+                } else {
+                    reject(res.statusText);
+                }
+            });
+    });
 }
 
 /**

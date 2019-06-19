@@ -2,7 +2,8 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { createEvent } from '../api/event';
-import { getLocations } from '../api/location';
+import { getLocationsFromServer } from '../api/location';
+import { getSports } from '../api/sports';
 import { getSessionUserId } from '../session';
 
 const MAX_ALLOWED_TEAM = 8;
@@ -77,7 +78,8 @@ class CreateEventPage extends React.Component {
       validated: false,
       error: null,
       success: false,
-      availableLocations: null
+      availableLocations: [],
+      availableSports: [],
     };
     // This binding is necessary to make `this` work in the callback
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -94,16 +96,29 @@ class CreateEventPage extends React.Component {
     this.handleDurationHourChange = this.handleDurationHourChange.bind(this);
   }
 
+  componentDidMount() {
+    getSports()
+      .then(data => this.setState({ availableSports: data }))
+      .catch(err => this.setState({ error: err }));
+  }
+
   handleSportChange(e) {
     const val = e.target.value;
-    if (Object.keys(sportsList).indexOf(val) > -1) {
-      getLocations(val)
+    if (val) {
+      getLocationsFromServer(val)
         .then((locationList) => {
           this.setState({
             sport: val,
             locationId: null,
             availableLocations: locationList
           });      
+        })
+        .catch((err) => {
+          this.setState({
+            error: err,
+            sport: val,
+            locationId: null
+          })
         })
     }
   }
@@ -128,7 +143,7 @@ class CreateEventPage extends React.Component {
 
   handleLocationIdChange(e) {
     const val = e.target.value;
-    if (this.state.availableLocations.filter(loc => loc.locationId === val).length > 0) {
+    if (this.state.availableLocations.filter(loc => loc.location_id === val).length > 0) {
       this.setState({ locationId: val });
     }
   }
@@ -210,7 +225,7 @@ class CreateEventPage extends React.Component {
     const { isEditing, validated, error, success } = this.state;
     const { eventType, eventName, sport, locationId, teamSize, numberOfTeams } = this.state;
     const { startYear, startMonth, startDate, startTime, durationHour } = this.state;
-    const { availableLocations } = this.state;
+    const { availableLocations, availableSports } = this.state;
 
     // TODO: should redirect to event page once done
     if (success === true) return <Redirect to="/browseEvents" />;
@@ -314,9 +329,9 @@ class CreateEventPage extends React.Component {
                     required
                   >
                     <option value="">-</option>
-                    {Object.keys(sportsList).map((sp) => (
-                      <option key={sp} value={sp}>
-                        {sportsList[sp]}
+                    {availableSports.map((sp) => (
+                      <option key={sp.name} value={sp.name}>
+                        {sp.name}
                       </option>
                     ))}
                   </Form.Control>
@@ -333,7 +348,7 @@ class CreateEventPage extends React.Component {
                     >
                       <option value="">-</option>
                       {availableLocations.map((loc) => (
-                        <option key={loc.locationId} value={loc.locationId}>
+                        <option key={loc.location_id} value={loc.location_id}>
                           {loc.name}
                         </option>
                       ))}
