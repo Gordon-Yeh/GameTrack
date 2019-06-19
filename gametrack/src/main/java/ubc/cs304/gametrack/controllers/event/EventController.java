@@ -56,5 +56,10 @@ public class EventController {
     	c.count = eventService.findNumberOfEvents();
     	return c;
     }
+    
+    @RequestMapping(method=RequestMethod.POST, value="/events/projected")
+    public List<Event> findAllEventsProjected(@RequestBody ProjectionFilter filters) {
+        return eventService.findEventsAndProject(filters);
+    }
 
 }

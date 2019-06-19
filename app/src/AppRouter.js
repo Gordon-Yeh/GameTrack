@@ -12,6 +12,7 @@ import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import ProjectionPage from './pages/ProjectionPage'
 
 function AppRouter() {
   return (
@@ -31,6 +32,7 @@ function AppRouter() {
             <Nav.Link href="/invites/">Invites</Nav.Link>
             <Nav.Link href="/Messages/">Messages</Nav.Link>
             <Nav.Link href="/draftmessage/">Send Message</Nav.Link>
+            <Nav.Link href="/Projections/">Projections Page</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -44,6 +46,7 @@ function AppRouter() {
       <Route path="/Messages/" component={MessagesPage} />
       <Route path="/draftmessage/" component={DraftMessagePage} />
       <Route path="/invites/" component={InvitesPage} />
+      <Route path="/projections" component={ProjectionPage} />
       <Route path="/event/" exact component={EventPage} />
       <Route path="/event/create" component={EventSettingsPage} />
       {/* reference: https://tylermcginnis.com/react-router-pass-props-to-components/ */}

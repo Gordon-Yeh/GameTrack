@@ -180,7 +180,6 @@ class EventPage extends React.Component {
     render() {
         if (this.state.redirectToEdit) {
             return (
-                // TODO change to redirect to edit event
                 <Redirect to={{
                     pathname: '/event/edit',
                     state: { event: this.state.event }

@@ -198,3 +198,21 @@ export async function getEventsUserJoined(userId) {
   }
 }
 
+export async function getProjectedEvents(filters) {
+  try {
+    const res = await fetch("/events/projected", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(filters)
+    });
+    const result = await res.json();
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
