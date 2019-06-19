@@ -56,6 +56,12 @@ public class EventService {
         userJoinService.joinTeam(new UserJoins(host_user_id, event_id, host_default_team_number));
 	}
 
+	void editEvent(EventForm form) {
+		final String sql = "UPDATE Event SET name=?, team_size=?, is_a_tournament=?, number_of_teams=? WHERE event_id=?";
+		final String event_id = form.getEvent_id().toString();
+		jdbcTemplate.update(sql, form.getName(), form.getTeam_size(), form.isIs_a_tournament(), form.getNumber_of_teams(), event_id);
+	}
+
 	List<Event> findAllEvents() {
 		return jdbcTemplate.query(selectEventWithJoinQuery, new BeanPropertyRowMapper<Event>(Event.class));
 	}

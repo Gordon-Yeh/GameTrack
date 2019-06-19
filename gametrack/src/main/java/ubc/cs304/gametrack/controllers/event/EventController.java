@@ -20,6 +20,11 @@ public class EventController {
         eventService.createEvent(form);
     }
 
+    @RequestMapping(method= RequestMethod.PUT, value="/events")
+    public void editEvent(@RequestBody EventForm form) {
+        eventService.editEvent(form);
+    }
+
     @RequestMapping(method=RequestMethod.GET, value="/events")
     public List<Event> getAllEvents() {
         return eventService.findAllEvents();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import { createEvent } from '../api/event';
+import { createEvent, editEvent } from '../api/event';
 import { getLocationsFromServer } from '../api/location';
 import { getSports } from '../api/sports';
 import { getSessionUserId } from '../session';
@@ -36,6 +36,7 @@ class CreateEventPage extends React.Component {
 
     if (isEditing && presetState) {
       event = {
+        event: presetState.event,
         eventId: presetState.event.event_id,
         eventName: presetState.event.name,
         eventType: presetState.event.is_a_tournament ? 'TOURNAMENT' : 'CASUAL',
@@ -181,7 +182,9 @@ class CreateEventPage extends React.Component {
 
   handleSubmit(e) {
     // prevents to page from reloading
-    const { eventType, eventName, sport, locationId, teamSize, numberOfTeams, startYear, startMonth, startDate, startTime, durationHour } = this.state;
+    const { isEditing, eventId } = this.state;
+    const { eventType, eventName, sport, locationId, teamSize, numberOfTeams } = this.state;
+    const { startYear, startMonth, startDate, startTime, durationHour } = this.state;
     e.preventDefault();
     e.stopPropagation();
 
@@ -204,13 +207,16 @@ class CreateEventPage extends React.Component {
     console.log(new Date(eventInfo.end_time).toISOString());
     console.log(eventInfo);
     
+    if (isEditing) {
+      editEvent(eventId, eventInfo)
+        .then(() => this.setState({ success: true }))
+        .catch(err => this.setState({ error: err }));
+      return;
+    }
+
     createEvent(eventInfo)
-      .then(() => {
-        this.setState({ success: true });
-      })
-      .catch((err) => {
-        this.setState({ error: err });
-      });
+      .then(() => this.setState({ success: true }))
+      .catch(err => this.setState({ error: err }));
   }
 
   render() {
@@ -220,7 +226,8 @@ class CreateEventPage extends React.Component {
     const { availableLocations, availableSports } = this.state;
 
     // TODO: should redirect to event page once done
-    if (success === true) return <Redirect to="/browseEvents" />;
+    if (success && isEditing) return  <Redirect to={{ path: '/event', state: { event: this.state.event } }}/>;
+    if (success) return <Redirect to="/browseEvents" />;
 
     return (
       <div
