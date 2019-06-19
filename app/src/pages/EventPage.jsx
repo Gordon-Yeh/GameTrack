@@ -9,7 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { getEventTeams, joinTeam, kickOutOfTeam, inviteUserToEvent } from '../api/event';
 import { getSportInfo } from '../api/sports';
 import { getAllUsers } from '../api/account'
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { getSessionFromCookie } from '../session'
 
 import './EventPage.css'
