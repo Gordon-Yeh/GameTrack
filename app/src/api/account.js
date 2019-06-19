@@ -27,7 +27,7 @@ export function login(username, password) {
             console.log(user);
             storeSession(user)
             resolve();
-          })
+          });
         } else {
           console.log(res.statusText);
           reject(res.statusText);
@@ -51,7 +51,11 @@ export function signup(userInfo) {
     })
       .then((res) => {
         if (res.status === 200) {
-          resolve();
+          res.json().then(user => {
+            console.log(user);
+            storeSession(user)
+            resolve();
+          });
         } else {
           console.log(res.statusText);
           reject(res.statusText);

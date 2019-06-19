@@ -18,12 +18,22 @@ public class UserService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	void createUser(@RequestBody User user) {
+	SecuredUser createUser(@RequestBody User user) {
+        final String insertNewUserQuery = "INSERT INTO User (user_id, username, full_name, password, city, province, age, sex) VALUES (?,?,?,?,?,?,?,?)";
+        final String selectUserViaUsernameQuery = "SELECT user_id, username, full_name, city, province, age, sex FROM User WHERE username=?";
+
 		jdbcTemplate.update(
-				"INSERT INTO User (user_id, username, full_name, password, city, province, age, sex) VALUES (?,?,?,?,?,?,?,?)",
+				insertNewUserQuery,
 				UUID.randomUUID().toString(), user.getUsername(), user.getFull_name(), user.getPassword(),
 				user.getCity(), user.getProvince(), user.getAge(), user.getSex());
-	}
+
+        SecuredUser newUser = jdbcTemplate.queryForObject(
+                selectUserViaUsernameQuery,
+                new Object[] { user.getUsername() },
+                new BeanPropertyRowMapper<SecuredUser>(SecuredUser.class));
+        
+        return newUser;
+    }
 
 	List<User> findAllUsers() {
 		List<User> allUsers = jdbcTemplate.query(

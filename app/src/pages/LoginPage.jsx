@@ -65,7 +65,7 @@ class LoginPage extends React.Component {
                 borderRadius: '.25rem'
               }}
             >
-            
+              <h1>Login</h1>
               {error && (
                 <Alert variant="danger">
                   {Object.keys(errorMessages).indexOf(error) > -1 ? errorMessages[error] : error}
