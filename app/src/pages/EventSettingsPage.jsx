@@ -34,23 +34,31 @@ const errorMessages = {
 class CreateEventPage extends React.Component {
   constructor(props) {
     super(props);
+
+    const isEditing = Boolean(this.props.isEditing);
+    const event = props.location.state.event;
+
+    this.state = {};
     this.state = {
+      isEditing,
+      eventId: isEditing ? event.event_id : null,
+
       validated: false,
       error: null,
       success: false,
 
-      eventType: null,
-      startYear: CURRENT_YEAR,
-      startMonth: CURRENT_MONTH,
-      startDate: CURRENT_DATE,
-      startTime: null,
+      eventType: isEditing ? (event.is_a_tournament ? 'Tournament' : 'Casual') : null,
+      startYear: isEditing ? new Date(event.start_time).getFullYear() : CURRENT_YEAR,
+      startMonth: isEditing ? new Date(event.start_time).getMonth() : CURRENT_MONTH,
+      startDate: isEditing ? new Date(event.start_time).getDate() : CURRENT_DATE,
+      startTime: isEditing ? new Date(event.start_time).getHours() : 8,
 
       durationHour: 1,
         
-      sport: null,
-      locationId: null,
-      teamSize: null,
-      numberOfTeams: 2,
+      sport: isEditing ? event.sport : null,
+      locationId: isEditing ? event.location_id : null,
+      teamSize: isEditing ? event.team_size : null,
+      numberOfTeams: isEditing ? event.number_of_teams : 2,
 
       availableLocations: null
     };
@@ -173,7 +181,7 @@ class CreateEventPage extends React.Component {
   }
 
   render() {
-    const { validated, error, success } = this.state;
+    const { isEditing, validated, error, success } = this.state;
     const { eventType, sport, locationId, teamSize, numberOfTeams } = this.state;
     const { startYear, startMonth, startDate, startTime, durationHour } = this.state;
     const { availableLocations } = this.state;
@@ -197,7 +205,7 @@ class CreateEventPage extends React.Component {
                 borderRadius: '.25rem'
               }}
             >
-              <h1>Create New Event</h1>
+              <h1>{isEditing ? 'Editing Event' : 'Create New Event'}</h1>
               {error && (
                 <Alert variant="danger">
                   {Object.keys(errorMessages).indexOf(error) > 0 ? errorMessages[error] : error}

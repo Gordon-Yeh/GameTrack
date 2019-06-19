@@ -5,8 +5,8 @@ import SignupPage from './pages/SignupPage';
 import BrowseEventsPage from './pages/BrowseEventsPage';
 import MyEventsPage from './pages/MyEventsPage';
 import LeaderboardsPage from './pages/LeaderbooardsPage';
-import CreateEventPage from './pages/CreateEventPage';
 import MessagesPage from "./pages/MessagesPage";
+import EventSettingsPage from './pages/EventSettingsPage';
 import InvitesPage from "./pages/InvitesPage"
 import EventPage from "./pages/EventPage"
 import DraftMessagePage from "./pages/DraftMessagePage";
@@ -42,7 +42,9 @@ function AppRouter() {
       <Route path="/browseEvents" component={BrowseEventsPage} />
       <Route path="/myEvents" component={MyEventsPage} />
       <Route path="/leaderboards" component={LeaderboardsPage} />
-      <Route path="/createEvent/" component={CreateEventPage} />
+      <Route path="/event/create" component={EventSettingsPage} />
+      {/* reference: https://tylermcginnis.com/react-router-pass-props-to-components/ */}
+      <Route path="/event/edit" render={(props) => <EventSettingsPage {...props} isEditing/>} />
       <Route path="/Messages/" component={MessagesPage} />
       <Route path="/invites/" component={InvitesPage} />
       <Route path="/Event/" component={EventPage} />
