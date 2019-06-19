@@ -39,4 +39,8 @@ public class UserController {
         return userService.findUsersWhoParticipatedInAllEvents();
     }
 
+    @RequestMapping(method=RequestMethod.GET, value="/users/usercount")
+    public Integer getUserCount() {
+        return userService.countUsers();
+    }
 }
