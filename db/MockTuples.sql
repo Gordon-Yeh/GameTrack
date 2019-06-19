@@ -3,7 +3,7 @@
 -- Users af93f012-8ef9-11e9-bc42-526af7764f64
 INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'dario8235', 'Dario Lowery', '18138372fad4b94533cd4881f03dc6c69296dd897234e0cee83f727e2e6b1f63', 23, 'M', 'Surrey', 'BC');
 
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'colm_carney2', 'Colm Carney', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 30, 'F', 'Vancouver', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f65', 'colm_carney2', 'Colm Carney', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 30, 'F', 'Vancouver', 'BC');
 
 INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f66', 'ricric', 'Rico Browne', '5e7cd28f77173d4f6155f18aa0d3fe2697aa4e2b125e06afdcef35cedbbab8e6', 19, 'M', 'Chilliwack', 'BC');
 
@@ -107,3 +107,83 @@ INSERT INTO SportDescription(name, suggested_number_of_player, sport_id) VALUES 
     9,
     'The game of baseball.'
 );
+
+-- LocationBooking
+
+INSERT INTO LocationBooking VALUES ('1c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', '1561021200', '1561028400',
+ '9cc46862-8efa-11e9-bc42-526af7764f64');
+
+INSERT INTO LocationBooking VALUES ('2c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', '1562331600', '1562337000',
+ '9cc46861-8efa-11e9-bc42-526af7764f64');
+
+INSERT INTO LocationBooking VALUES ('3c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', '1562142600', '1562149800',
+ '9cc46862-8efa-11e9-bc42-526af7764f64');
+
+INSERT INTO LocationBooking VALUES ('4c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', '1547539200', '1547548200',
+ '9cc46862-8efa-11e9-bc42-526af7764f64');
+
+INSERT INTO LocationBooking VALUES ('5c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', '1557045000', '1557144000',
+ '9cc46858-8efa-11e9-bc42-526af7764f64');
+
+-- Event
+
+INSERT INTO Event VALUES ('aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 'aaa101', 5, false, 2, 
+'af93f012-8ef9-11e9-bc42-526af7764f64', '1c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', 'Basketball');
+
+INSERT INTO Event VALUES ('bec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 'aaa102', 6, false, 2, 
+'af93f012-8ef9-11e9-bc42-526af7764f64', '2c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', 'Hockey');
+
+INSERT INTO Event VALUES ('cec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 'aaa103', 2, false, 2, 
+'af93f012-8ef9-11e9-bc42-526af7764f65', '3c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', 'Tennis');
+
+INSERT INTO Event VALUES ('dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 'aaa104', 11, true, 4, 
+'af93f012-8ef9-11e9-bc42-526af7764f67', '5c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', 'Soccer');
+
+INSERT INTO Event VALUES ('eec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 'aaa105', 5, false, 2, 
+'af93f012-8ef9-11e9-bc42-526af7764f66', '4c32df2e-7ed8-4445-9ba6-5cabe4d86a6e', 'Basketball');
+
+-- Team
+
+INSERT INTO Team VALUES ('aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1, 'Long Live SFU', 1, 5);
+
+INSERT INTO Team VALUES ('aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 2, 'Make UBC Great Again', 4, 5);
+
+INSERT INTO Team VALUES ('dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1, 'Bookstore Boys', 7, 11);
+
+INSERT INTO Team VALUES ('dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 2, 'Hugh Dempster Devils', 3, 11);
+
+INSERT INTO Team VALUES ('dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 3, 'Walter Gage Girls', 0, 11);
+
+-- Invite
+
+INSERT INTO Invite VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'af93f012-8ef9-11e9-bc42-526af7764f65',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935');
+
+INSERT INTO Invite VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'af93f012-8ef9-11e9-bc42-526af7764f66',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935');
+
+INSERT INTO Invite VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'af93f012-8ef9-11e9-bc42-526af7764f67',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935');
+
+INSERT INTO Invite VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'af93f012-8ef9-11e9-bc42-526af7764f68',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935');
+
+INSERT INTO Invite VALUES ('af93f012-8ef9-11e9-bc42-526af7764f67', 'af93f012-8ef9-11e9-bc42-526af7764f64',
+'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935');
+
+-- UserJoins
+
+INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f65',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+
+INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f66',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+
+INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f67',
+'aec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+
+INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64',
+'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
+
+INSERT INTO UserJoins VALUES ('af93f012-8ef9-11e9-bc42-526af7764f68',
+'dec58bf8-e4bb-4ab3-a8e6-5a9c25729935', 1)
