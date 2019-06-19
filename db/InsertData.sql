@@ -1,16 +1,17 @@
 
 
 -- Users af93f012-8ef9-11e9-bc42-526af7764f64
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'dario8235', 'Dario Lowery', '18138372fad4b94533cd4881f03dc6c69296dd897234e0cee83f727e2e6b1f63', 23, 'M', 'Surrey', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f64', 'dario8235', 'Dario Lowery', '123123', 23, 'M', 'Surrey', 'BC');
 
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f65', 'colm_carney2', 'Colm Carney', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 30, 'F', 'Vancouver', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f65', 'colm_carney2', 'Colm Carney', '123123', 30, 'F', 'Vancouver', 'BC');
 
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f66', 'ricric', 'Rico Browne', '5e7cd28f77173d4f6155f18aa0d3fe2697aa4e2b125e06afdcef35cedbbab8e6', 19, 'M', 'Chilliwack', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f66', 'ricric', 'Rico Browne', '123123', 19, 'M', 'Chilliwack', 'BC');
 
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f67', 'astrid_hum', 'Astrid Humphries', '9b96378ff78bdc4ccabc3f2f1d7f528e52e07c02ada3517e798bb31b761d835a', 42, 'M', 'Vancouver', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f67', 'astrid_hum', 'Astrid Humphries', '123123', 42, 'M', 'Vancouver', 'BC');
 
-INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f68', 'arvbow', 'Arvin Bowen', 'afb1975b42c0b05086065ee9320a0f62e261c3b6f901d2bd1454853c3c0a6a85', 26, 'M', 'Vancouver', 'BC');
+INSERT INTO User VALUES ('af93f012-8ef9-11e9-bc42-526af7764f68', 'arvbow', 'Arvin Bowen', '123123', 26, 'M', 'Vancouver', 'BC');
 
+INSERT INTO User VALUES ('d4ff40a6-dbdb-47f0-9882-ff979423cf18', 'admin', 'Admin', '123123', 26, 'F', 'Vancouver', 'BC');
 
 -- Postal codes
 INSERT INTO PostalCode VALUES ('V6T1L9', 'BC', 'Vancouver');

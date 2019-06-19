@@ -37,7 +37,7 @@ function AppRouter() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Route path="/" exact component={LoginPage} />
+      <Route path="/" exact />
       <Route path="/login/" component={LoginPage} />
       <Route path="/signup/" component={SignupPage} />
       <Route path="/browseEvents" component={BrowseEventsPage} />
