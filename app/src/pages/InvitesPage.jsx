@@ -3,7 +3,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { getUsersInvites } from "../api/event";
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { getSessionFromCookie } from '../session';
 
 class InvitesPage extends React.Component {

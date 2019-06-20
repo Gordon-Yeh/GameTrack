@@ -3,7 +3,7 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import EventTable from './EventTable'
 import {getUserEvents, getEventsUserJoined} from '../api/event'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 import {getSessionFromCookie} from '../session'
 
 class MyEventsPage extends React.Component {
