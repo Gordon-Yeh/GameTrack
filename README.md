@@ -1,4 +1,4 @@
-## GameTrack
+## What is GameTrack?
 GameTrack is a web platform where active people can sign up, create sports events, and join local sports events. Users can also message others on the platform and invite them to events. The app offers locations for the users to book and host events, so they wouldn’t have to worry about finding a venue themselves.
 
 ## Motivation

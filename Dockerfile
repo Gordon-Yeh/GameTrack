@@ -5,4 +5,4 @@ FROM mysql:latest
 ENV MYSQL_DATABASE GAMETRACK
 
 # any sql scripts to populate the DB
-# COPY ./db/*.sql /docker-entrypoint-initdb.d/
+COPY ./db/*.sql /docker-entrypoint-initdb.d/
